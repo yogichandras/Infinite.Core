@@ -1,0 +1,8 @@
+﻿{
+  "MailConfig": {
+    "Smtp": "smtp.gmail.com",
+    "SmtpPort": 587,
+    "SenderMail": "mail.yourmail@gmail.com",
+    "Password": "pysluwbslervwdcl"
+  }
+}

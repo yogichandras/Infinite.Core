@@ -1,0 +1,56 @@
+﻿@using System.Globalization
+
+<environment names="Development,Staging,Production">
+    @*core scripts start*@
+    <script src="~/plugins/jquery/jquery.js" asp-append-version="true"></script>
+    @*core scripts end*@
+
+    @*admin-lte scripts start*@
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/adminlte.js" asp-append-version="true"></script>
+    @*admin-lte scripts end*@
+
+    @*abp scripts start*@
+    <script src="~/plugins-ext/block-ui/jquery.blockUI.js" asp-append-version="true"></script>
+    <script src="~/plugins/spin/spin.js" asp-append-version="true"></script>
+    <script src="~/plugins/spin/jquery.spin.js" asp-append-version="true"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/toastr/toastr.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/moment/moment-with-locales.js" asp-append-version="true"></script>
+    @*abp scripts end*@
+
+    @*other scripts start*@
+    <script src="~/plugins/jquery-validation/jquery.validate.js" asp-append-version="true"></script>
+    @*other scripts end*@
+
+    @*custom scripts start*@
+    <script src="~/js/consts.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*custom scripts end*@
+</environment>
+
+
+@if (CultureInfo.CurrentUICulture.Name != "en")
+{
+    var normalizedCurrentUICultureName = CultureInfo.CurrentUICulture.Name.Replace("-", "_");
+    var localizationFileNameWithExtension = "messages_";
+    switch (normalizedCurrentUICultureName)
+    {
+        case "zh_Hans":
+            localizationFileNameWithExtension += "zh";
+            break;
+        case "es_MX":
+            localizationFileNameWithExtension += "es";
+            break;
+        default:
+            localizationFileNameWithExtension += normalizedCurrentUICultureName;
+            break;
+    }
+    localizationFileNameWithExtension += ".min.js";
+    <script src="~/plugins/jquery-validation/localization/@localizationFileNameWithExtension" asp-append-version="true"></script>
+}
+
+<script type="text/javascript">
+    // Localizing momentjs
+    moment.locale('id');
+</script>
