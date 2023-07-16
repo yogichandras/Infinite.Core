@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject INFINITE.CORE.MVC.Helper.CoreHelper CoreHelper
+@{
     Layout = null;
 
     var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
@@ -30,10 +31,14 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <small>&copy; @DateTime.Now.Year @pageTitle. <b>Version </b> @DateTime.Now.ToString("yyyyMMdd")</small>
+                <small>&copy; @DateTime.Now.Year @pageTitle. <b>Version </b> @CoreHelper.APPVERSION </small>
             </div>
         </div>
     </div>
+    <script>
+        const APIBaseURL = '@CoreHelper.APIURL';
+        const APIVersion = '@CoreHelper.APIVERSION';
+    </script>
     @await Html.PartialAsync("_Scripts.cshtml")
     @RenderSection("scripts", required: false)
 </body>

@@ -32,7 +32,7 @@ builder.Services
                 ClockSkew = TimeSpan.Zero
             };
         });
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews().AddControllersAsServices();
 
 var app = builder.Build();

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace INFINITE.CORE.MVC.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : CoreController
     {
         public IActionResult Login()
         {
@@ -41,7 +41,7 @@ namespace INFINITE.CORE.MVC.Controllers
         public IActionResult Logout()
         {
             Response.Cookies.Delete(Configuration["ApplicationConfig:Issuer"]);
-            return RedirectToAction(Configuration["ApplicationConfig:LoginUrl"]);
+            return RedirectToAction(Configuration["ApplicationConfig:LoginMethod"]);
         }
     }
 }

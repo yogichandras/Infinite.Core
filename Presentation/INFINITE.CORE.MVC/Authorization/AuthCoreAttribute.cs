@@ -24,8 +24,8 @@ namespace INFINITE.CORE.MVC.Authorization
                 // not logged in or role not authorized
                context.Result = new RedirectToRouteResult(new RouteValueDictionary
                {
-                    { "controller", authHelper.Configuration["ApplicationConfig:AuthController"] },
-                    { "action", authHelper.Configuration["ApplicationConfig:LoginUrl"] }
+                    { "controller", authHelper.Configuration["ApplicationConfig:LoginController"] },
+                    { "action", authHelper.Configuration["ApplicationConfig:LoginMethod"] }
                });
             }
         }

@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace INFINITE.CORE.MVC.Base
 {
-    public class BaseController : Controller
+    public abstract class CoreViewComponent : ViewComponent
     {
-        public IConfiguration Configuration { get; set; }
         public AuthHelper Auth { get; set; }
     }
 }

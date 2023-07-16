@@ -1,8 +1,10 @@
 ﻿using Autofac;
+using INFINITE.CORE.Data.Model;
 using INFINITE.CORE.MVC.Authorization;
 using INFINITE.CORE.MVC.Base;
-using INFINITE.CORE.MVC.Controllers;
-using Microsoft.Extensions.Configuration;
+using INFINITE.CORE.MVC.Helper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 namespace INFINITE.CORE.MVC
@@ -24,13 +26,14 @@ namespace INFINITE.CORE.MVC
 
             container.RegisterInstance(configuration).As<IConfiguration>();
             container.RegisterType<AuthHelper>().PropertiesAutowired();
+            container.RegisterType<CoreHelper>().PropertiesAutowired();
 
             // Get the assembly where the controllers are located
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             // Get all public non-abstract classes that derive from Controller
             var controllerTypes = assembly.GetTypes()
-                .Where(type => typeof(BaseController).IsAssignableFrom(type) && !type.IsAbstract && type.IsPublic);
+                .Where(type => (typeof(CoreController).IsAssignableFrom(type) || typeof(CoreViewComponent).IsAssignableFrom(type)) && !type.IsAbstract && type.IsPublic);
 
             // Register each controller type
             foreach (var controllerType in controllerTypes)

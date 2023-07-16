@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using INFINITE.CORE.MVC.Views.Shared.Components.NavbarArea;
+@using INFINITE.CORE.MVC.Views.Shared.Components.SidebarArea;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,11 +16,11 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="~/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="~/img/logo.png" alt="LOGO">
         </div>
 
-        @await Html.PartialAsync("Components/Navbar.cshtml")
-        @await Html.PartialAsync("Components/Sidebar.cshtml")
+        @await Component.InvokeAsync(typeof(NavbarAreaViewComponent))
+        @await Component.InvokeAsync(typeof(SidebarAreaViewComponent))
         
 
         <!-- Content Wrapper. Contains page content -->

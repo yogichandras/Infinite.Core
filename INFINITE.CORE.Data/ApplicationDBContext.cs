@@ -12,6 +12,7 @@ namespace INFINITE.CORE.Data
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Repository> Repository { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RolePermissions> RolePermissions { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
@@ -191,6 +192,46 @@ namespace INFINITE.CORE.Data
                 entity.Property(e => e.UpdateDate)
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATE_DATE");
+            });
+
+            modelBuilder.Entity<RolePermissions>(entity =>
+            {
+                entity.ToTable("ROLE_PERMISSIONS");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.CreateBy)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("CREATE_BY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.CreateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("CREATE_DATE")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IdRole)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ID_ROLE")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.Permission)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("PERMISSION")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.HasOne(d => d.IdRoleNavigation)
+                    .WithMany(p => p.RolePermissions)
+                    .HasForeignKey(d => d.IdRole)
+                    .HasConstraintName("FK_ROLE_PERMISSIONS_ROLE");
             });
 
             modelBuilder.Entity<User>(entity =>

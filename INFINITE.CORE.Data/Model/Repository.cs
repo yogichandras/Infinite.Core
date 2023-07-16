@@ -1,6 +1,6 @@
-﻿using INFINITE.CORE.Data.Base.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using INFINITE.CORE.Data.Base.Interface;
 
 
 namespace INFINITE.CORE.Data.Model 

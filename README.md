@@ -15,7 +15,7 @@ dotnet tool update --global dotnet-ef
 ### 2.Scaffolding 
 setelah mengeksekusi install tool kemudian ketik/copy code berikut :
 ```scaffold
-dotnet ef dbcontext scaffold "Server=localhost;Database=INFINITE.CORE;user id =sa;password=Banda@40;MultipleActiveResultSets=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir "..\INFINITE.CORE.Data\Model" -c ApplicationDBContext --context-dir "..\INFINITE.CORE.Data" --namespace "INFINITE.CORE.Data.Model" --context-namespace "INFINITE.CORE.Data" --no-pluralize -f --no-onconfiguring --schema "dbo"
+dotnet ef dbcontext scaffold "Server=localhost;Database=INFINITE.CORE;user id =sa;password=Banda@40;MultipleActiveResultSets=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir "..\INFINITE.CORE.Data\Model" -c ApplicationDBContext --context-dir "..\INFINITE.CORE.Data" --namespace "INFINITE.CORE.Data.Model" --context-namespace "INFINITE.CORE.Data" --no-pluralize -f --no-onconfiguring --schema "dbo"
 ```
 ganti localhost username dan password apabila ingin merubah koneksi ke server yang dituju.
 

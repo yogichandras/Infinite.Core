@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace INFINITE.CORE.MVC.Controllers
 {
     [AuthCore]
-    public class HomeController : BaseController
+    public class HomeController : CoreController
     {
         private readonly ILogger<HomeController> _logger;
 

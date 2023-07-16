@@ -1,7 +1,8 @@
-﻿<footer class="main-footer">
+﻿@inject INFINITE.CORE.MVC.Helper.CoreHelper CoreHelper
+<footer class="main-footer">
     <strong>Copyright &copy; @DateTime.Now.Year <a href="https://papicoding.io">INFINITE.CORE</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.0
+        <b>Version</b> @CoreHelper.APPVERSION
             </div>
 </footer>

@@ -9,6 +9,7 @@ namespace INFINITE.CORE.Data.Model
     {
         public Role()
         {
+            RolePermissions = new HashSet<RolePermissions>();
             UserRole = new HashSet<UserRole>();
         }
 
@@ -20,6 +21,7 @@ namespace INFINITE.CORE.Data.Model
         public string UpdateBy { get; set; }
         public DateTime? UpdateDate { get; set; }
 
+        public virtual ICollection<RolePermissions> RolePermissions { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }
