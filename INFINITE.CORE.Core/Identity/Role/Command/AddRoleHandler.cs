@@ -15,6 +15,8 @@ using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Helper;
 using INFINITE.CORE.Core.Request;
 using Microsoft.EntityFrameworkCore;
+using INFINITE.CORE.Data.Model;
+using INFINITE.CORE.Data.Provider;
 
 namespace INFINITE.CORE.Core.Role.Command
 {
@@ -59,9 +61,27 @@ namespace INFINITE.CORE.Core.Role.Command
             StatusResponse result = new StatusResponse();
             try
             {
+                if (request.Permissions != null && request.Permissions.Count > 0)
+                {
+                    request.Permissions = request.Permissions.GroupBy(x => x).Select(x => x.Key).ToList();
+                    var checkPermissions = request.Permissions.Any(x => !Permissions.List().Any(z => z == x));
+                    if (checkPermissions)
+                    {
+                        result.BadRequest("Permissions doesn't exists.");
+                        return result;
+                    }
+                };
+
                 var data = _mapper.Map<INFINITE.CORE.Data.Model.Role>(request);
                 data.CreateBy = request.Inputer;
                 data.CreateDate = DateTime.Now;
+                data.RolePermissions = request.Permissions.Select(x => new RolePermissions
+                {
+                    CreateBy = request.Inputer,
+                    CreateDate = DateTime.Now,
+                    IdRole = data.Id,
+                    Permission = x
+                }).ToList();
                 var add = await _context.AddSave(data);
                 if (add.Success)
                     result.OK();

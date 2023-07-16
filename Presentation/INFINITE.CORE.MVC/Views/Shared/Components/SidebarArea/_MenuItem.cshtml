@@ -1,0 +1,79 @@
+﻿@using INFINITE.CORE.MVC.Helper;
+@using INFINITE.CORE.MVC.Navigations;
+@model INFINITE.CORE.MVC.Navigations.NavigationDefinition
+@{
+    var isActive = IsActiveMenuItem(Model, ViewBag.CurrentPageName);
+    var subMenus = Model.Child;
+    var hasSubMenus = subMenus.Any();
+    var isAuthenticated = Model.AuthenticatedPermissions.Any(x => Model.RequiredPermissions.Any(z => z == x));
+}
+@functions {
+    private string applicationPath = "/";
+    static bool IsActiveMenuItem(NavigationDefinition menuItem, string pageName)
+    {
+        if (string.IsNullOrWhiteSpace(pageName))
+            return false;
+
+        return pageName.Equals(menuItem.Title, StringComparison.InvariantCultureIgnoreCase)
+            || menuItem.Child.Any(cn => IsActiveMenuItem(cn, pageName));
+    }
+
+    string CalculateMenuUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return applicationPath;
+
+        if (UrlChecker.IsRooted(url))
+            return url;
+
+        return applicationPath + url;
+    }
+}
+@if (!hasSubMenus && isAuthenticated)
+{
+    var linkUrl = CalculateMenuUrl(Model.Url);
+    var linkClasses = $"nav-link {(isActive ? "active" : null)}";
+    var linkTarget = !string.IsNullOrEmpty(Model.Target) ? Html.Raw($" target=\"{Model.Target}\"") : null;
+
+    <li class="nav-item">
+        <a href="@linkUrl" class="@linkClasses" @linkTarget>
+            @if (!string.IsNullOrEmpty(Model.Icon))
+            {
+                <text>
+                    <i class="nav-icon @Url.Content(Model.Icon)"></i>
+                </text>
+            }
+            <p>@Model.Title</p>
+        </a>
+    </li>
+}
+else if (hasSubMenus && isAuthenticated)
+{
+    var navitemClasses = $"nav-item {(hasSubMenus ? "has-treeview" : "")} {(isActive ? "menu-open" : "")}";
+    navitemClasses = !string.IsNullOrEmpty(navitemClasses?.Trim()) ? navitemClasses : null;
+    var linkClasses = $"nav-link {(isActive ? "active" : null)}";
+
+    <li class="@navitemClasses">
+        <a href="javascript:;" class="@linkClasses">
+            @if (!string.IsNullOrEmpty(Model.Icon))
+            {
+                <text>
+                    <i class="nav-icon @Url.Content(Model.Icon)"></i>
+                </text>
+            }
+            <p>
+                @Model.Title
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        @if (hasSubMenus)
+        {
+            <ul class="nav nav-treeview">
+                @foreach (var subMenu in subMenus)
+                {
+                    @await Html.PartialAsync("Components/SidebarArea/_MenuItem", subMenu)
+                }
+            </ul>
+        }
+    </li>
+}

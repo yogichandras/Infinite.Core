@@ -69,7 +69,12 @@ namespace INFINITE.CORE.Core.User.Command
                 if (request.Role != null && request.Role.Count > 0)
                 {
                     List<string> claim_roles = request.Role.Select(d => $"{d.Id}-{d.Nama}").ToList();
-                    claims.Add(new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(claim_roles))); ;
+                    claims.Add(new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(claim_roles)));
+                }
+
+                if (request.Permissions != null && request.Permissions.Count > 0)
+                {
+                    claims.Add(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(request.Permissions)));
                 }
 
                 var key = Encoding.ASCII.GetBytes(_config.SecretKey);

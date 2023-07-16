@@ -17,7 +17,8 @@ namespace INFINITE.CORE.Core.Request
 		public bool Active{ get; set; }
 		[Required]
 		public string Name{ get; set; }
-
+        [Required]
+        public List<string> Permissions { get; set; }
     }
 }
 

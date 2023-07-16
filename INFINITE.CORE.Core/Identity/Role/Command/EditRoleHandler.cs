@@ -15,6 +15,8 @@ using INFINITE.CORE.Data;
 using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Helper;
 using INFINITE.CORE.Core.Request;
+using INFINITE.CORE.Data.Provider;
+using INFINITE.CORE.Data.Model;
 
 namespace INFINITE.CORE.Core.Role.Command
 {
@@ -59,13 +61,36 @@ namespace INFINITE.CORE.Core.Role.Command
             StatusResponse result = new StatusResponse();
             try
             {
-                var existingItems = await _context.Entity<INFINITE.CORE.Data.Model.Role>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
+                if (request.Permissions != null && request.Permissions.Count > 0)
+                {
+                    request.Permissions = request.Permissions.GroupBy(x => x).Select(x => x.Key).ToList();
+                    var checkPermissions = request.Permissions.Any(x => !Permissions.List().Any(z => z == x));
+                    if (checkPermissions)
+                    {
+                        result.BadRequest("Permissions doesn't exists.");
+                        return result;
+                    }
+                };
+
+                var existingItems = await _context.Entity<INFINITE.CORE.Data.Model.Role>().Where(d => d.Id == request.Id).Include(x => x.RolePermissions).FirstOrDefaultAsync();
                 if (existingItems != null)
                 {
-                    var before = existingItems;
                     var item = _mapper.Map(request, existingItems);
                     item.UpdateBy = request.Inputer;
                     item.UpdateDate = DateTime.Now;
+
+                    existingItems.RolePermissions.Clear();
+                    foreach (var permission in request.Permissions)
+                    {
+                        existingItems.RolePermissions.Add(new RolePermissions
+                        {
+                            CreateBy = request.Inputer,
+                            CreateDate = DateTime.Now,
+                            IdRole = existingItems.Id,
+                            Permission = permission
+                        });
+                    }
+
                     var update = await _context.UpdateSave(item);
                     if (update.Success)
                         result.OK();

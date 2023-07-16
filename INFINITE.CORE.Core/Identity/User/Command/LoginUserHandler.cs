@@ -57,7 +57,8 @@ namespace INFINITE.CORE.Core.User.Command
                 string _hash = _helper.PasswordEncrypt(request.Password);
                 var user = await _context.Entity<Data.Model.User>()
                             .Where(d => d.Username.ToLower() == request.Username.ToLower())
-                            .Include(d => d.UserRole).ThenInclude(d=>d.IdRoleNavigation)
+                            .Include(d => d.UserRole).ThenInclude(d => d.IdRoleNavigation)
+                            .ThenInclude(d => d.RolePermissions)
                             .OrderByDescending(d=>d.CreateDate).FirstOrDefaultAsync();
 
                 if (user != null)
@@ -108,6 +109,7 @@ namespace INFINITE.CORE.Core.User.Command
                             Id = d.IdRole,
                             Nama = d.IdRoleNavigation.Name
                         }).ToList(),
+                        Permissions = user.UserRole.Select(d=> d.IdRoleNavigation.RolePermissions.Select(c => c.Permission)).SelectMany(c => c).GroupBy(c => c).Select(c => c.Key).ToList(),
                         Expired = null,
                         RefreshToken = Guid.NewGuid().ToString()
                     });

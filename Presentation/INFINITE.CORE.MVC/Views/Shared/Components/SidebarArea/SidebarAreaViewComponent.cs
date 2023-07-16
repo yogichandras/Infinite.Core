@@ -1,5 +1,6 @@
 ﻿using INFINITE.CORE.MVC.Authorization;
 using INFINITE.CORE.MVC.Base;
+using INFINITE.CORE.MVC.Navigations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace INFINITE.CORE.MVC.Views.Shared.Components.SidebarArea
@@ -14,7 +15,8 @@ namespace INFINITE.CORE.MVC.Views.Shared.Components.SidebarArea
         {
             var model = new SidebarAreaViewModel
             {
-                Session = Auth.Session
+                Session = Auth.Session,
+                Navigations = new NavigationProvider().ListMenu()
             };
             return View(model);
         }

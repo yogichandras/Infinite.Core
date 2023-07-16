@@ -1,5 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace INFINITE.CORE.MVC.Authorization
@@ -51,11 +53,19 @@ namespace INFINITE.CORE.MVC.Authorization
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = tokenHandler.ReadJwtToken(token);
+            var permissions = new List<string>();
+            var claimPermission = claims.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData).Value;
+            if (!string.IsNullOrEmpty(claimPermission))
+            {
+                permissions = JsonConvert.DeserializeObject<List<string>>(claimPermission);
+            }
+
             var session = new CoreSession
             {
-                Id = claims.Claims.FirstOrDefault(x => x.Type == "sub").Value,
-                Email = claims.Claims.FirstOrDefault(x => x.Type == "email").Value,
-                Username = claims.Claims.FirstOrDefault(x => x.Type == "unique_name").Value,
+                Id = claims.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub).Value,
+                Email = claims.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Email).Value,
+                Username = claims.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value,
+                Permissions = permissions
             };
             return session;
         }

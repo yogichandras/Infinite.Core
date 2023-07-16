@@ -11,6 +11,7 @@
     {
         public Guid Id { get; set; }
         public List<ReferensiStringObject> Role { get; set; }
+        public List<string> Permissions { get; set; }
         public string Username { get; set; }
         public string FullName { get; set; }
         public string Mail { get; set; }

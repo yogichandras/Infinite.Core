@@ -4,6 +4,7 @@ namespace INFINITE.CORE.Data.Provider
 {
     public static class PermissionNames
     {
+        public const string Pages_Home = "Pages.Home";
         public const string Pages_Users = "Pages.Users";
         public const string Pages_Roles = "Pages.Roles";
         public const string Pages_Config = "Pages.Config";
