@@ -24,13 +24,25 @@ function showError(title, message) {
     });
 }
 
+function getCookieValue(cookieName) {
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        const cookieParts = cookie.split('=');
+        const name = cookieParts[0];
+        const value = cookieParts[1];
+
+        if (name === cookieName) {
+            return decodeURIComponent(value);
+        }
+    }
+
+    return null; // Cookie not found
+}
 
 function getToken() {
-    var token = ""; // Token default kosong
-    // Cek apakah token ada di Application Storage
-    if (localStorage.getItem("tokenizer")) {
-        token = localStorage.getItem("tokenizer");
-    }
+    var token = getCookieValue(CookieName);
     return token;
 }
 
@@ -105,16 +117,4 @@ $.fn.serializeFormToObject = function (camelCased = false) {
     }
 
     return obj;
-};
-
-// Service Account
-var service = {
-    user: {
-        login: function (targetElementId, data, errorHandler) {
-            var url = "/User/login"; // Ganti dengan path URL endpoint yang sesuai
-            return sendRequest("POST", url, targetElementId, data, false, errorHandler);
-        },
-        // Tambahkan method lain di sini
-    },
-    // Tambahkan service lain di sini
 };

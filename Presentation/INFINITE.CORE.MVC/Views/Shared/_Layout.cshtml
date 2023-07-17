@@ -1,5 +1,6 @@
 ﻿@using INFINITE.CORE.MVC.Views.Shared.Components.NavbarArea;
 @using INFINITE.CORE.MVC.Views.Shared.Components.SidebarArea;
+@inject INFINITE.CORE.MVC.Helper.CoreHelper CoreHelper
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,11 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    
+    <script>
+        const APIBaseURL = '@CoreHelper.APIURL';
+        const APIVersion = '@CoreHelper.APIVERSION';
+        const CookieName = '@CoreHelper.ISSUER';
+    </script>
     @await Html.PartialAsync("_Scripts.cshtml")
     @RenderSection("scripts", required: false)
 </body>

@@ -10,6 +10,7 @@ using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Role.Query;
 using INFINITE.CORE.Core.Request;
 using INFINITE.CORE.Core.Role.Command;
+using INFINITE.CORE.Core.Identity.Role.Query;
 
 namespace INFINITE.CORE.API.Controllers
 {
@@ -56,6 +57,11 @@ namespace INFINITE.CORE.API.Controllers
             return Wrapper(await _mediator.Send(new DeleteRoleRequest() { Id = id, Inputer = Inputer }));
         }
 
+        [HttpGet(template: "list-permissions")]
+        public async Task<IActionResult> ListPermissions()
+        {
+            return Wrapper(await _mediator.Send(new GetPermissionListRequest()));
+        }
     }
 }
 

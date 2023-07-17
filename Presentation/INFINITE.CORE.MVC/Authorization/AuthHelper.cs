@@ -54,10 +54,10 @@ namespace INFINITE.CORE.MVC.Authorization
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = tokenHandler.ReadJwtToken(token);
             var permissions = new List<string>();
-            var claimPermission = claims.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData).Value;
-            if (!string.IsNullOrEmpty(claimPermission))
+            var claimPermission = claims.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData);
+            if (claimPermission != null && !string.IsNullOrEmpty(claimPermission.Value))
             {
-                permissions = JsonConvert.DeserializeObject<List<string>>(claimPermission);
+                permissions = JsonConvert.DeserializeObject<List<string>>(claimPermission.Value);
             }
 
             var session = new CoreSession

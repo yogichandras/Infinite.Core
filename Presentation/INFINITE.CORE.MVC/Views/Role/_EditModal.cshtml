@@ -1,0 +1,38 @@
+﻿<div class="modal fade" id="RoleEditModal" tabindex="-1" role="dialog" aria-labelledby="RoleEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Components/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Edit Role"))
+            <form name="roleEditForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="rolename">Role ID</label>
+                        <div class="col-md-9">
+                            <input id="roleid_edit" type="text" name="Id" class="form-control" required maxlength="32" minlength="2" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="rolename">Role Name</label>
+                        <div class="col-md-9">
+                            <input id="rolename_edit" type="text" name="Name" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="role-description"></label>
+                        <div class="col-md-9">
+                            <input type="checkbox" name="Active" value="True" id="roleisactive_edit" checked="checked" />
+                            <label for="roleisactive">Active</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Permissions</label>
+                        <div class="col-md-9">
+                            <div class="row" id="row-permissions-edit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Components/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

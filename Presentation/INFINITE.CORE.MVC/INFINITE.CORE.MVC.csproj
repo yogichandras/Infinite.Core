@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\INFINITE.CORE.Core\INFINITE.CORE.Core.csproj" />
     <ProjectReference Include="..\..\INFINITE.CORE.Data\INFINITE.CORE.Data.csproj" />
   </ItemGroup>
 

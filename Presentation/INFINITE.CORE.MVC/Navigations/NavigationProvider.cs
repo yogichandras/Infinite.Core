@@ -18,14 +18,14 @@ namespace INFINITE.CORE.MVC.Navigations
                 .AddItem(
                     new NavigationDefinition(
                         title: Pages.Users,
-                        url: "Users",
+                        url: "User",
                         icon: "fas fa-users",
                         requiredPermissions: new List<string> { PermissionNames.Pages_Users }
                     )
                 ).AddItem(
                     new NavigationDefinition(
                         title: Pages.Roles,
-                        url: "Roles",
+                        url: "Role",
                         icon: "fas fa-theater-masks",
                         requiredPermissions: new List<string> { PermissionNames.Pages_Roles }
                     )

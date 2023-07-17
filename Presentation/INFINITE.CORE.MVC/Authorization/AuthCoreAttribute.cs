@@ -39,6 +39,11 @@ namespace INFINITE.CORE.MVC.Authorization
                    { "action", authHelper.Configuration["ApplicationConfig:LogoutMethod"] }
                 };
 
+                if (session == null)
+                {
+                    context.Result = new RedirectToRouteResult(logoutRoute);
+                }
+
                 if (session.Permissions == null || session.Permissions.Count < 1)
                 {
                     context.Result = new RedirectToRouteResult(logoutRoute);
