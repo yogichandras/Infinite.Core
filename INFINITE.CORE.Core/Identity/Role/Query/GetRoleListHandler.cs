@@ -43,7 +43,7 @@ namespace INFINITE.CORE.Core.Role.Query
             ListResponse<RoleResponse> result = new ListResponse<RoleResponse>();
             try
             {
-				var query = _context.Entity<INFINITE.CORE.Data.Model.Role>().AsQueryable();
+				var query = _context.Entity<INFINITE.CORE.Data.Model.Role>().Include(x => x.RolePermissions).AsQueryable();
 
 				#region Filter
 				Expression<Func<INFINITE.CORE.Data.Model.Role, object>> column_sort = null;
@@ -79,7 +79,12 @@ namespace INFINITE.CORE.Core.Role.Query
 					query = query.Skip((request.Start.Value - 1) * request.Length.Value).Take(request.Length.Value);
 				var data_list = await query.ToListAsync();
 
-				result.List = _mapper.Map<List<RoleResponse>>(data_list);
+				result.List = data_list.Select(x =>
+				{
+					var role = _mapper.Map<RoleResponse>(x);
+					role.Permissions = x.RolePermissions.Select(x => x.Permission).ToList();
+					return role;
+                }).ToList();
 				result.Filtered = data_list.Count();
 				result.Count = await query_count.CountAsync();
 				result.OK();

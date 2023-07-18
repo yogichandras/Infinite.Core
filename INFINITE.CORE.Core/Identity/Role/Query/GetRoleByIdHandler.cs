@@ -44,10 +44,11 @@ namespace INFINITE.CORE.Core.Role.Query
             ObjectResponse<RoleResponse> result = new ObjectResponse<RoleResponse>();
             try
             {
-                var item = await _context.Entity<INFINITE.CORE.Data.Model.Role>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
+                var item = await _context.Entity<INFINITE.CORE.Data.Model.Role>().Where(d => d.Id == request.Id).Include(x => x.RolePermissions).FirstOrDefaultAsync();
                 if (item != null)
                 {
                     result.Data = _mapper.Map<RoleResponse>(item);
+                    result.Data.Permissions = item.RolePermissions.Select(x => x.Permission).ToList();
                     result.OK();
                 }
                 else

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @await Html.PartialAsync("~/Views/Shared/Components/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Edit Role"))
-            <form name="roleEditForm" role="form" class="form-horizontal">
+            <form id="roleEditForm" name="roleEditForm" role="form" class="form-horizontal">
                 <div class="modal-body">
                     <div class="form-group row required">
                         <label class="col-md-3 col-form-label" for="rolename">Role ID</label>
@@ -19,7 +19,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="role-description"></label>
                         <div class="col-md-9">
-                            <input type="checkbox" name="Active" value="True" id="roleisactive_edit" checked="checked" />
+                            <input type="checkbox" name="Active" value="True" id="roleisactive_edit" />
                             <label for="roleisactive">Active</label>
                         </div>
                     </div>

@@ -21,6 +21,7 @@ namespace INFINITE.CORE.Core.Response
     {
 		public bool Active{ get; set; }
 		public string Name{ get; set; }
+        public List<string> Permissions { get; set; }
 
         public void Mapping(IMappingExpression<INFINITE.CORE.Data.Model.Role, RoleResponse> map)
         {

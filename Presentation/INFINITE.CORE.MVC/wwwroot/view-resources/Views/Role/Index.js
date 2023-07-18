@@ -83,7 +83,6 @@
     ]);
 
     _$formCreate = $('#roleCreateForm');
-    // add role
     _$formCreate.find('.save-button').on('click', (e) => {
         e.preventDefault();
 
@@ -117,5 +116,77 @@
                 showSuccess('Success', 'Role Added');
             }
         });
+    });
+
+
+    _$formEdit = $('#roleEditForm');
+    $(document).on('click', '.edit-role', function () {
+        var id = $(this).data('role-id');
+        service.role.get('#RoleEditModal', {
+                'Id': id
+            }, function (error) {
+            showError('Error', 'Failed to Get Role');
+        }).done(function (response) {
+            if (response.Succeeded) {
+                $('#roleid_edit').val(response.Data.Id);
+                $('#rolename_edit').val(response.Data.Name);
+                if (response.Data.Active) {
+                    $('#roleisactive_edit').attr('checked', 'checked');
+                }
+                $('input[name="permissions_edit"]').prop('checked', false);
+                response.Data.Permissions.forEach(function (permission) {
+                    $('input[name="permissions_edit"][value="' + permission + '"]').prop('checked', true);
+                });
+            }
+        });
+    });
+
+    _$formEdit.find('.save-button').on('click', (e) => {
+        e.preventDefault();
+        if (!_$formEdit.valid()) {
+            return;
+        }
+        var role = _$formEdit.serializeFormToObject();
+        role.Permissions = [];
+        var _$permissionCheckboxes = _$formEdit[0].querySelectorAll("input[name='permissions_edit']:checked");
+        if (_$permissionCheckboxes) {
+            for (var permissionIndex = 0; permissionIndex < _$permissionCheckboxes.length; permissionIndex++) {
+                var _$permissionCheckbox = $(_$permissionCheckboxes[permissionIndex]);
+                role.Permissions.push(_$permissionCheckbox.val());
+            }
+        }
+        delete role.permissions;
+        if (role.Active) {
+            role.Active = true;
+        } else {
+            role.Active = false;
+        }
+
+        service.role.edit(_$formEdit, role, function (error) {
+            showError('Error', 'Failed to Edit Role');
+        }).done(function (response) {
+            if (response.Succeeded) {
+                _$formEdit.closest('.modal').modal('hide');
+                _$formEdit.trigger('reset');
+                _$formEdit.find('input[name=Name]').focus();
+                _$table.ajax.reload();
+                showSuccess('Success', 'Role Edited');
+            }
+        });
+
+    });
+
+    $(document).on('click', '.delete-role', function () {
+        var id = $(this).data('role-id');
+        showConfirmation('Delete Role', 'Are you sure to delete this data?', function () {
+            service.role.delete('#RolesTable', { 'Id': id }, function () {
+                showError('Error', 'Failed to Delete Role');
+            }).done(function (response) {
+                if (response.Succeeded) {
+                    _$table.ajax.reload();
+                    showSuccess('Success', 'Role Deleted');
+                }
+            });
+        })
     });
 })(jQuery);

@@ -15,12 +15,41 @@
     position: 'absolute', // Element positioning
 };
 
+function showSuccess(title, message) {
+    Swal.fire({
+        icon: 'success',
+        title: title,
+        text: message
+    });
+}
+
 function showError(title, message) {
     Swal.fire({
         icon: 'error',
         title: title,
         text: message,
         confirmButtonColor: "#F2350A",
+    });
+}
+
+function showConfirmation(title, message, confirmCallback, denyCallback) {
+    // Menampilkan konfirmasi SweetAlert2
+    Swal.fire({
+        title: title,
+        text: message,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        confirmButtonColor: "#F2350A"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (confirmCallback)
+                return confirmCallback();
+        } else {
+            if (denyCallback)
+                return denyCallback();
+        }
     });
 }
 
@@ -65,9 +94,20 @@ function sendRequest(method, url, targetElementId, data, isFormData, errorHandle
     };
 
     // Jika method adalah GET, ubah data menjadi query params
-    if (method.toUpperCase() === "GET") {
-        requestOptions.params = data;
+    if (method.toUpperCase() === "GET" || method.toUpperCase() === "DELETE") {
+        if (data) {
+            // Generate parameter di URL berdasarkan properti dalam data
+            var params = Object.keys(data).map(function (key) {
+                return '/' + encodeURIComponent(data[key]);
+            }).join('');
+            requestOptions.url += params;
+        }
     } else {
+        if (method.toUpperCase() === "PUT" || method.toUpperCase() === "PATCH") {
+            if (data.Id) {
+                requestOptions.url += '/' + data.Id;
+            }
+        }
         // Jika isFormData true, kirim sebagai form data
         if (isFormData) {
             requestOptions.data = $.param(data);
