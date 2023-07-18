@@ -46,7 +46,6 @@ function getToken() {
     return token;
 }
 
-// Fungsi untuk mengirim request Ajax
 function sendRequest(method, url, targetElementId, data, isFormData, errorHandler) {
     var spinner = new Spinner(optSpinner).spin($(targetElementId)[0]);
     $(targetElementId).block({ message: null });
@@ -98,7 +97,62 @@ function sendRequest(method, url, targetElementId, data, isFormData, errorHandle
     });
 }
 
-//serializeFormToObject plugin untuk jQuery
+function sendDataTableRequest(method, url, targetElementId, filter, columns) {
+    var token = getToken();
+    var headers = {};
+    if (token) {
+        headers = {
+            "Authorization": "Bearer " + token
+        };
+    }
+
+   
+    
+    var _$table = $(targetElementId).DataTable({
+        serverSide: true,
+        ajax: {
+            url: APIBaseURL + url,
+            type: method,
+            contentType: "application/json",
+            headers: headers,
+            processData: false,
+            responsive: {
+                details: {
+                    type: 'column'
+                }
+            },
+            data: function (d) {
+                var requestBody = {
+                    Sort: {
+                        Field: columns[d.order[0].column].data,
+                        Type: d.order[0].dir === 'asc' ? 1 : 0 // Mengonversi urutan pengurutan ke tipe yang diharapkan oleh server
+                    },
+                    Start : d.start + 1,
+                    Length : d.length,
+                };
+                if (d.search.value) {
+                    requestBody.Filter = [
+                        {
+                            Field: filter,
+                            Search: d.search.value
+                        }
+                    ];
+                }
+                return JSON.stringify(requestBody);
+            },
+            dataType: 'json',
+            dataSrc: function (json) {
+                json.recordsTotal = json.Count;
+                json.recordsFiltered = json.Filtered;
+                return json.List;
+            }
+        },
+        columnDefs: columns
+    });
+
+    return _$table;
+}
+
 $.fn.serializeFormToObject = function (camelCased = false) {
     //serialize to array
     var data = $(this).serializeArray();

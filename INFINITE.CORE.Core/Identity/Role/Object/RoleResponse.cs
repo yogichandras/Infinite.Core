@@ -13,19 +13,14 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using INFINITE.CORE.Data.Model;
+using INFINITE.CORE.Data.Base;
 
 namespace INFINITE.CORE.Core.Response
 {
-    public partial class RoleResponse: IMapResponse<RoleResponse, INFINITE.CORE.Data.Model.Role>
+    public partial class RoleResponse: BaseStringEntity, IMapResponse<RoleResponse, INFINITE.CORE.Data.Model.Role>
     {
-		public string Id{ get; set; }
 		public bool Active{ get; set; }
-		public string CreateBy{ get; set; }
-		public DateTime CreateDate{ get; set; }
 		public string Name{ get; set; }
-		public string UpdateBy{ get; set; }
-		public DateTime? UpdateDate{ get; set; }
-
 
         public void Mapping(IMappingExpression<INFINITE.CORE.Data.Model.Role, RoleResponse> map)
         {

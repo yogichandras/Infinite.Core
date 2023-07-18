@@ -11,6 +11,14 @@ var service = {
         list_permissions: function (targetElementId, data, errorHandler) {
             var url = '/Role/list-permissions';
             return sendRequest("GET", url, targetElementId, data, false, errorHandler);
+        },
+        list: function (targetElementId, columns) {
+            var url = '/Role/list';
+            return sendDataTableRequest("POST", url, targetElementId, 'name', columns);
+        },
+        add: function (targetElementId, data, errorHandler) {
+            var url = '/Role/add';
+            return sendRequest("POST", url, targetElementId, data, false, errorHandler);
         }
     }
     // Tambahkan service lain di sini

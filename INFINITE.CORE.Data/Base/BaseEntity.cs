@@ -4,27 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace INFINITE.CORE.Data.Base
 {
-    public class BaseEntity : IBaseEntity
+    public class BaseEntity
     {
-        public DateTime CreatedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-
-        [Column("CreatedBy")]
-        [Display(Name = "Creator")]
-        public string CreatedBy { get { return CreatedBy ?? "N/A"; } set { CreatedBy = value; } }
-
-        [Column("ModifiedBy")]
-        [Display(Name = "Modifier")]
-        public string ModifiedBy { get { return ModifiedBy ?? "N/A"; } set { ModifiedBy = value; } }
-        public string CreatedByWithUserNameOnly { get { if (this.CreatedBy != null) { if (this.CreatedBy.Contains("|")) { return this.CreatedBy.Split("|")[0]; } else { return this.CreatedBy; } } else { return "N/A"; } } }
-        public string CreatedAtFormated { get { return this.CreatedDate.ToString("dd MMM yyyy HH:mm:ss"); } }
-        public string ModifiedByWithUserNameOnly { get { if (this.ModifiedBy != null) { if (this.ModifiedBy.Contains("|")) { return this.ModifiedBy.Split("|")[0]; } else { return this.ModifiedBy; } } else { return "N/A"; } } }
-        public string ModifiedAtFormated { get { return this.ModifiedDate.HasValue ? this.ModifiedDate.Value.ToString("dd MMM yyyy HH:mm:ss") : "N/A"; } }
-        public bool IsDeleted { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public string DeletedBy { get { return DeletedBy ?? "N/A"; } set { DeletedBy = value; } }
-        public string DeletedByWithUserNameOnly { get { if (this.DeletedBy != null) { if (this.DeletedBy.Contains("|")) { return this.DeletedBy.Split("|")[0]; } else { return this.CreatedBy; } } else { return "N/A"; } } }
-        public string DeletedAtFormated { get { return this.DeletedAt.HasValue ? this.DeletedAt.Value.ToString("dd MMM yyyy HH:mm:ss") : "N/A"; } }
+        public DateTime CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public string CreateBy { get; set; }
+        public string UpdateBy { get; set; }
+        public string CreateByWithUserNameOnly { get { if (this.CreateBy != null) { if (this.CreateBy.Contains("|")) { return this.CreateBy.Split("|")[1]; } else { return this.CreateBy; } } else { return default; } } }
+        public string UpdateByWithUserNameOnly { get { if (this.UpdateBy != null) { if (this.UpdateBy.Contains("|")) { return this.UpdateBy.Split("|")[1]; } else { return this.UpdateBy; } } else { return default; } } }
     }
     public class BaseGuidEntity : BaseEntity
     {
@@ -41,6 +28,6 @@ namespace INFINITE.CORE.Data.Base
     }
     public class BaseStringEntity : BaseEntity
     {
-        public string Id { get { return Id ?? "N/A"; } set { Id = value; } }
+        public string Id { get; set; }
     }
 }
