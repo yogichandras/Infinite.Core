@@ -170,7 +170,7 @@ function sendDataTableRequest(method, url, targetElementId, filter, columns) {
                     Start : d.start + 1,
                     Length : d.length,
                 };
-                if (d.search.value) {
+                if (d.search.value && filter) {
                     requestBody.Filter = [
                         {
                             Field: filter,

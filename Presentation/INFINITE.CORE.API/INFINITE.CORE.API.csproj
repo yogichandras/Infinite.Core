@@ -6,6 +6,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Proxy\template-proxy.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Proxy\template-proxy.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Jint" Version="2.11.58" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
@@ -29,6 +38,10 @@
 		<None Update="Media\empty">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Proxy\Generated\" />
 	</ItemGroup>
 
 </Project>

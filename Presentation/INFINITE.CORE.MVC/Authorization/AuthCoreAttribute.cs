@@ -28,6 +28,7 @@ namespace INFINITE.CORE.MVC.Authorization
                     { "controller", authHelper.Configuration["ApplicationConfig:LoginController"] },
                     { "action", authHelper.Configuration["ApplicationConfig:LoginMethod"] }
                });
+                return;
             }
 
             if (permissions != null && permissions.Length > 0)
@@ -42,17 +43,20 @@ namespace INFINITE.CORE.MVC.Authorization
                 if (session == null)
                 {
                     context.Result = new RedirectToRouteResult(logoutRoute);
+                    return;
                 }
 
                 if (session.Permissions == null || session.Permissions.Count < 1)
                 {
                     context.Result = new RedirectToRouteResult(logoutRoute);
+                    return;
                 }
 
                 var isAuthenticated = session.Permissions.Any(x => permissions.ToList().Any(z => z == x));
                 if (!isAuthenticated)
                 {
                     context.Result = new RedirectToRouteResult(logoutRoute);
+                    return;
                 }
             }
         }

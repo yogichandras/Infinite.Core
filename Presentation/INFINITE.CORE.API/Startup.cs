@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Serilog.Formatting.Compact;
 using Serilog;
+using INFINITE.CORE.API.Proxy;
 
 namespace INFINITE.CORE.API
 {
@@ -21,9 +22,11 @@ namespace INFINITE.CORE.API
         private const string _defaultCorsPolicyName = "localhost";
         private IConfiguration _configuration { get; }
         private IWebHostEnvironment _environment { get; set; }
-        public Startup(IWebHostEnvironment environment)
+        private Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment { get; set; }
+        public Startup(IWebHostEnvironment environment, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
         {
             _environment = environment;
+            _hostingEnvironment = hostingEnvironment;
             string _environtmentName = "Development";
             if (environment.IsDevelopment())
                 _environtmentName = "Development";
@@ -199,6 +202,7 @@ namespace INFINITE.CORE.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            DynamicAjaxProxy.Up(_hostingEnvironment);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
