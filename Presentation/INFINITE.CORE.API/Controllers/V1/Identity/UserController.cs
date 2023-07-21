@@ -4,17 +4,18 @@ using INFINITE.CORE.Core.User.Query;
 using INFINITE.CORE.Core.User.Command;
 using Microsoft.AspNetCore.Authorization;
 using INFINITE.CORE.Core.Request;
+using INFINITE.CORE.Core.Identity.User.Command;
 
 namespace INFINITE.CORE.API.Controllers
 {
     public partial class UserController : BaseController<UserController>
     {
-        [AllowAnonymous]
-        [HttpPost(template: "register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
+        [HttpPost(template: "create")]
+        public async Task<IActionResult> Create([FromBody] CreateUserRequest request)
         {
             return Wrapper(await _mediator.Send(request));
         }
+        
         [AllowAnonymous]
         [HttpPost(template: "login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
@@ -80,6 +81,12 @@ namespace INFINITE.CORE.API.Controllers
         public async Task<IActionResult> RefreshToken()
         {
             return Wrapper(await _mediator.Send(new RefreshTokenRequest() { Token = Token.RefreshToken }));
+        }
+
+        [HttpDelete(template: "delete/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            return Wrapper(await _mediator.Send(new DeleteUserRequest() { Id = id, Inputer = Inputer }));
         }
     }
 }

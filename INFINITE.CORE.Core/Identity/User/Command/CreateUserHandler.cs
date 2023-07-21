@@ -1,33 +1,32 @@
-using AutoMapper;
-using MediatR;
-using INFINITE.CORE.Data.Base.Interface;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.Logging;
-using INFINITE.CORE.Data;
-using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Helper;
-using INFINITE.CORE.Shared.Interface;
-using Microsoft.Extensions.Options;
 using INFINITE.CORE.Core.Request;
-using INFINITE.CORE.Data.Model;
+using INFINITE.CORE.Data;
+using INFINITE.CORE.Data.Base.Interface;
+using INFINITE.CORE.Shared.Attributes;
+using INFINITE.CORE.Shared.Interface;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 
 namespace INFINITE.CORE.Core.User.Command
 {
-    public class RegisterUserRequest : UserInfoRequest,IRequest<StatusResponse>
+    public class CreateUserRequest : UserInfoRequest,IRequest<StatusResponse>
     {
         [Required]
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public List<string> Roles { get; set; }
     }
 
-    internal class RegisterUserHandler : IRequestHandler<RegisterUserRequest, StatusResponse>
+    internal class CreateUserHandler : IRequestHandler<CreateUserRequest, StatusResponse>
     {
         private readonly ILogger _logger;
         private readonly IGeneralHelper _helper;
         private readonly IUnitOfWork<ApplicationDBContext> _context;
-        public RegisterUserHandler(
-            ILogger<RegisterUserHandler> logger,
+        public CreateUserHandler(
+            ILogger<CreateUserHandler> logger,
             IGeneralHelper helper,
             IUnitOfWork<ApplicationDBContext> context
             )
@@ -36,7 +35,7 @@ namespace INFINITE.CORE.Core.User.Command
             _helper = helper;
             _context = context;
         }
-        public async Task<StatusResponse> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
+        public async Task<StatusResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             StatusResponse result = new StatusResponse();
             try
@@ -72,27 +71,32 @@ namespace INFINITE.CORE.Core.User.Command
                 };
                 _context.Add(user);
 
-                Data.Model.UserRole user_role = new Data.Model.UserRole()
+                if (request.Roles != null && request.Roles.Count > 0)
                 {
-                    CreateBy = request.Username,
-                    CreateDate = DateTime.Now,
-                    Id = Guid.NewGuid(),
-                    IdRole = RoleType.MBR.ToString(),
-                    IdUser = user.Id
-                };
-                _context.Add(user_role);
+                    foreach (var item in request.Roles)
+                    {
+                        Data.Model.UserRole user_role = new Data.Model.UserRole()
+                        {
+                            CreateBy = request.Username,
+                            CreateDate = DateTime.Now,
+                            Id = Guid.NewGuid(),
+                            IdRole = item,
+                            IdUser = user.Id
+                        };
+                        _context.Add(user_role);
+                    }
+                }
 
                 var save = await _context.Commit();
                 if (save.Success)
                     result.OK();
                 else
                     result.BadRequest(save.Message);
-
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed Register User", request);
-                result.Error("Failed Register User", ex.Message);
+                _logger.LogError(ex, "Failed Create User", request);
+                result.Error("Failed Create User", ex.Message);
             }
             return result;
         }

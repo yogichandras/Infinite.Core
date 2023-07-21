@@ -93,12 +93,17 @@ delete: function (targetElementId, data, errorHandler) {
 list_permissions: function (targetElementId, data, errorHandler) {
     var url = '/role/list-permissions';
     return sendRequest('GET', url, targetElementId, data, false, errorHandler);
+},
+
+all: function (targetElementId, data, errorHandler) {
+    var url = '/role/all';
+    return sendRequest('GET', url, targetElementId, data, false, errorHandler);
 }
 },
 user: {
 
-register: function (targetElementId, data, errorHandler) {
-    var url = '/user/register';
+create: function (targetElementId, data, errorHandler) {
+    var url = '/user/create';
     return sendRequest('POST', url, targetElementId, data, false, errorHandler);
 },
 
@@ -150,6 +155,11 @@ reset_password: function (targetElementId, data, errorHandler) {
 refresh_token: function (targetElementId, data, errorHandler) {
     var url = '/user/refresh_token';
     return sendRequest('POST', url, targetElementId, data, false, errorHandler);
+},
+
+delete: function (targetElementId, data, errorHandler) {
+    var url = '/user/delete';
+    return sendRequest('DELETE', url, targetElementId, data, false, errorHandler);
 }
 },
 userrole: {

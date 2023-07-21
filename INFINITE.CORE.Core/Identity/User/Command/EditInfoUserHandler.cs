@@ -1,12 +1,12 @@
 using AutoMapper;
-using MediatR;
+using INFINITE.CORE.Core.Request;
+using INFINITE.CORE.Data;
 using INFINITE.CORE.Data.Base.Interface;
-using System.ComponentModel.DataAnnotations;
+using INFINITE.CORE.Shared.Attributes;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using INFINITE.CORE.Data;
-using INFINITE.CORE.Shared.Attributes;
-using INFINITE.CORE.Core.Request;
+using System.ComponentModel.DataAnnotations;
 
 namespace INFINITE.CORE.Core.User.Command
 {
@@ -15,6 +15,8 @@ namespace INFINITE.CORE.Core.User.Command
     {
         [Required]
         public Guid Id { get; set; }
+        [Required]
+        public List<string> Roles { get; set; }
     }
     public class EditInfoUserMapping : Profile
     {
@@ -42,7 +44,7 @@ namespace INFINITE.CORE.Core.User.Command
             StatusResponse result = new StatusResponse();
             try
             {
-                var user = await _context.Entity<Data.Model.User>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
+                var user = await _context.Entity<Data.Model.User>().Include(x => x.UserRole).Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (user != null)
                 {
                     user.Mail = request.Mail;
@@ -50,6 +52,18 @@ namespace INFINITE.CORE.Core.User.Command
                     user.Fullname = request.Fullname;
                     user.UpdateBy = user.Username;
                     user.UpdateDate = DateTime.Now;
+
+                    user.UserRole.Clear();
+                    foreach (var item in request.Roles)
+                    {
+                        user.UserRole.Add(new Data.Model.UserRole
+                        {
+                            CreateBy = user.Username,
+                            CreateDate = DateTime.Now,
+                            IdRole = item,
+                            IdUser = user.Id
+                        });
+                    }
 
                     var update = await _context.UpdateSave(user);
                     if (update.Success)

@@ -62,6 +62,13 @@ namespace INFINITE.CORE.API.Controllers
         {
             return Wrapper(await _mediator.Send(new GetPermissionListRequest()));
         }
+
+
+        [HttpGet(template: "all")]
+        public async Task<IActionResult> All()
+        {
+            return Wrapper(await _mediator.Send(new GetRoleAllRequest()));
+        }
     }
 }
 

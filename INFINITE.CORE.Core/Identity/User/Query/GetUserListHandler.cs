@@ -43,7 +43,7 @@ namespace INFINITE.CORE.Core.User.Query
             ListResponse<UserResponse> result = new ListResponse<UserResponse>();
             try
             {
-				var query = _context.Entity<INFINITE.CORE.Data.Model.User>().AsQueryable();
+				var query = _context.Entity<INFINITE.CORE.Data.Model.User>().Include(x => x.UserRole).ThenInclude(x => x.IdRoleNavigation).AsQueryable();
 
 				#region Filter
 				Expression<Func<INFINITE.CORE.Data.Model.User, object>> column_sort = null;

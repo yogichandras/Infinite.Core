@@ -45,7 +45,7 @@ namespace INFINITE.CORE.Core.User.Query
             ObjectResponse<UserDetailResponse> result = new ObjectResponse<UserDetailResponse>();
             try
             {
-                var item = await _context.Entity<INFINITE.CORE.Data.Model.User>().Where(d => d.Id == request.Id)
+                var item = await _context.Entity<INFINITE.CORE.Data.Model.User>().Include(x => x.UserRole).ThenInclude(x => x.IdRoleNavigation).Where(d => d.Id == request.Id)
                     .Include(d=>d.UserRole).ThenInclude(d=>d.IdRoleNavigation).FirstOrDefaultAsync();
                 if (item != null)
                 {
