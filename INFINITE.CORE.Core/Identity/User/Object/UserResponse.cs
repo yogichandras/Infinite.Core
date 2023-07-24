@@ -7,20 +7,17 @@
 
 using AutoMapper;
 using INFINITE.CORE.Core.Helper;
+using INFINITE.CORE.Data.Base;
 using INFINITE.CORE.Shared.Attributes;
 
 namespace INFINITE.CORE.Core.Response
 {
-    public partial class UserResponse: IMapResponse<UserResponse, INFINITE.CORE.Data.Model.User>
+    public partial class UserResponse: BaseStringEntity, IMapResponse<UserResponse, INFINITE.CORE.Data.Model.User>
     {
-		public Guid Id{ get; set; }
         public string Username { get; set; }
         public string Fullname { get; set; }
         public string Mail { get; set; }
-        public string Nrk { get; set; }
         public string PhoneNumber { get; set; }
-        public string PersonnelNo { get; set; }
-        public DateTime LastSynchronize { get; set; }
         public string Status { get; set; }
         public List<ReferensiStringObject> Roles { get; set; }
 
