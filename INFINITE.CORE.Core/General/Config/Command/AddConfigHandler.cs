@@ -15,22 +15,22 @@ using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Helper;
 using INFINITE.CORE.Core.Request;
 
-namespace INFINITE.CORE.Core.UserRole.Command
+namespace INFINITE.CORE.Core.Config.Command
 {
 
     #region Request
-    public class AddUserRoleMapping: Profile
+    public class AddConfigMapping: Profile
     {
-        public AddUserRoleMapping()
+        public AddConfigMapping()
         {
-            CreateMap<AddUserRoleRequest, UserRoleRequest>().ReverseMap();
+            CreateMap<AddConfigRequest, ConfigRequest>().ReverseMap();
         }
     }
-    public class AddUserRoleRequest :UserRoleRequest, IMapRequest<INFINITE.CORE.Data.Model.UserRole, AddUserRoleRequest>,IRequest<StatusResponse>
+    public class AddConfigRequest :ConfigRequest, IMapRequest<INFINITE.CORE.Data.Model.Config, AddConfigRequest>,IRequest<StatusResponse>
     {
         [Required]
         public string Inputer { get; set; }
-        public void Mapping(IMappingExpression<AddUserRoleRequest, INFINITE.CORE.Data.Model.UserRole> map)
+        public void Mapping(IMappingExpression<AddConfigRequest, INFINITE.CORE.Data.Model.Config> map)
         {
             //use this for mapping
             //map.ForMember(d => d.EF_COLUMN, opt => opt.MapFrom(s => s.Object));
@@ -38,14 +38,14 @@ namespace INFINITE.CORE.Core.UserRole.Command
     }
     #endregion
 
-    internal class AddUserRoleHandler : IRequestHandler<AddUserRoleRequest, StatusResponse>
+    internal class AddConfigHandler : IRequestHandler<AddConfigRequest, StatusResponse>
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
         private readonly IUnitOfWork<ApplicationDBContext> _context;
-        public AddUserRoleHandler(
-            ILogger<AddUserRoleHandler> logger,
+        public AddConfigHandler(
+            ILogger<AddConfigHandler> logger,
             IMapper mapper,
             IMediator mediator,
             IUnitOfWork<ApplicationDBContext> context
@@ -56,12 +56,12 @@ namespace INFINITE.CORE.Core.UserRole.Command
             _mediator = mediator;
             _context = context;
         }
-        public async Task<StatusResponse> Handle(AddUserRoleRequest request, CancellationToken cancellationToken)
+        public async Task<StatusResponse> Handle(AddConfigRequest request, CancellationToken cancellationToken)
         {
             StatusResponse result = new StatusResponse();
             try
             {
-                var data = _mapper.Map<INFINITE.CORE.Data.Model.UserRole>(request);
+                var data = _mapper.Map<INFINITE.CORE.Data.Model.Config>(request);
                 data.CreateBy = request.Inputer;
                 data.CreateDate = DateTime.Now;
                 var add = await _context.AddSave(data);
@@ -72,8 +72,8 @@ namespace INFINITE.CORE.Core.UserRole.Command
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed Add UserRole", request);
-                result.Error("Failed Add UserRole", ex.Message);
+                _logger.LogError(ex, "Failed Add Config", request);
+                result.Error("Failed Add Config", ex.Message);
             }
             return result;
         }

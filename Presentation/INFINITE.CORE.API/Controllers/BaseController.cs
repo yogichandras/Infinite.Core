@@ -78,10 +78,7 @@ namespace INFINITE.CORE.API.Controllers
         {
             get
             {
-                var identity = HttpContext.User.Identity as ClaimsIdentity;
-                string id = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-                string name = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.GivenName)?.Value;
-                return $"{id}|{name}";
+                return $"{Token?.User?.Id}|{Token?.User?.Username}";
             }
         }
     }

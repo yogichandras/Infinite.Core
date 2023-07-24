@@ -16,24 +16,24 @@ using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Helper;
 using INFINITE.CORE.Core.Request;
 
-namespace INFINITE.CORE.Core.UserRole.Command
+namespace INFINITE.CORE.Core.Config.Command
 {
 
     #region Request
-    public class EditUserRoleMapping: Profile
+    public class EditConfigMapping: Profile
     {
-        public EditUserRoleMapping()
+        public EditConfigMapping()
         {
-            CreateMap<EditUserRoleRequest, UserRoleRequest>().ReverseMap();
+            CreateMap<EditConfigRequest, ConfigRequest>().ReverseMap();
         }
     }
-    public class EditUserRoleRequest :UserRoleRequest, IMapRequest<INFINITE.CORE.Data.Model.UserRole, EditUserRoleRequest>,IRequest<StatusResponse>
+    public class EditConfigRequest :ConfigRequest, IMapRequest<INFINITE.CORE.Data.Model.Config, EditConfigRequest>,IRequest<StatusResponse>
     {
         [Required]
         public Guid Id { get; set; }
         [Required]
         public string Inputer { get; set; }
-        public void Mapping(IMappingExpression<EditUserRoleRequest, INFINITE.CORE.Data.Model.UserRole> map)
+        public void Mapping(IMappingExpression<EditConfigRequest, INFINITE.CORE.Data.Model.Config> map)
         {
             //use this for mapping
             //map.ForMember(d => d.EF_COLUMN, opt => opt.MapFrom(s => s.Object));
@@ -41,50 +41,47 @@ namespace INFINITE.CORE.Core.UserRole.Command
     }
     #endregion
 
-    internal class EditUserRoleHandler : IRequestHandler<EditUserRoleRequest, StatusResponse>
+    internal class EditConfigHandler : IRequestHandler<EditConfigRequest, StatusResponse>
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IMediator _mediator;
         private readonly IUnitOfWork<ApplicationDBContext> _context;
-        public EditUserRoleHandler(
-            ILogger<EditUserRoleHandler> logger,
+        public EditConfigHandler(
+            ILogger<EditConfigHandler> logger,
             IMapper mapper,
-            IMediator mediator,
             IUnitOfWork<ApplicationDBContext> context
             )
         {
             _logger = logger;
             _mapper = mapper;
-            _mediator = mediator;
             _context = context;
         }
-        public async Task<StatusResponse> Handle(EditUserRoleRequest request, CancellationToken cancellationToken)
+        public async Task<StatusResponse> Handle(EditConfigRequest request, CancellationToken cancellationToken)
         {
             StatusResponse result = new StatusResponse();
             try
             {
-                var existingItems = await _context.Entity<INFINITE.CORE.Data.Model.UserRole>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
+                var existingItems = await _context.Entity<INFINITE.CORE.Data.Model.Config>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (existingItems != null)
                 {
-                    var before = existingItems;
                     var item = _mapper.Map(request, existingItems);
-                    
-                    
+                    item.UpdateBy = request.Inputer;
+                    item.UpdateDate = DateTime.Now;
                     var update = await _context.UpdateSave(item);
                     if (update.Success)
                         result.OK();
                     else
                         result.BadRequest(update.Message);
+
                     return result;
                 }
                 else
-                    result.NotFound($"Id UserRole {request.Id} Tidak Ditemukan");
+                    result.NotFound($"Id Config {request.Id} Tidak Ditemukan");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed Edit UserRole", request);
-                result.Error("Failed Edit UserRole", ex.Message);
+                _logger.LogError(ex, "Failed Edit Config", request);
+                result.Error("Failed Edit Config", ex.Message);
             }
             return result;
         }

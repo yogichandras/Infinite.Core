@@ -1,4 +1,58 @@
 var service = {
+config: {
+
+get: function (targetElementId, data, errorHandler) {
+    var url = '/config/get';
+    return sendRequest('GET', url, targetElementId, data, false, errorHandler);
+},
+
+list: function (targetElementId, columns) {
+    var url = '/config/list';
+    return sendDataTableRequest('POST', url, targetElementId, null, columns);
+},
+
+add: function (targetElementId, data, errorHandler) {
+    var url = '/config/add';
+    return sendRequest('POST', url, targetElementId, data, false, errorHandler);
+},
+
+edit: function (targetElementId, data, errorHandler) {
+    var url = '/config/edit';
+    return sendRequest('PUT', url, targetElementId, data, false, errorHandler);
+},
+
+delete: function (targetElementId, data, errorHandler) {
+    var url = '/config/delete';
+    return sendRequest('DELETE', url, targetElementId, data, false, errorHandler);
+}
+},
+emailtemplate: {
+
+get: function (targetElementId, data, errorHandler) {
+    var url = '/emailtemplate/get';
+    return sendRequest('GET', url, targetElementId, data, false, errorHandler);
+},
+
+list: function (targetElementId, columns) {
+    var url = '/emailtemplate/list';
+    return sendDataTableRequest('POST', url, targetElementId, null, columns);
+},
+
+add: function (targetElementId, data, errorHandler) {
+    var url = '/emailtemplate/add';
+    return sendRequest('POST', url, targetElementId, data, false, errorHandler);
+},
+
+edit: function (targetElementId, data, errorHandler) {
+    var url = '/emailtemplate/edit';
+    return sendRequest('PUT', url, targetElementId, data, false, errorHandler);
+},
+
+delete: function (targetElementId, data, errorHandler) {
+    var url = '/emailtemplate/delete';
+    return sendRequest('DELETE', url, targetElementId, data, false, errorHandler);
+}
+},
 notification: {
 
 get: function (targetElementId, data, errorHandler) {
@@ -159,33 +213,6 @@ refresh_token: function (targetElementId, data, errorHandler) {
 
 delete: function (targetElementId, data, errorHandler) {
     var url = '/user/delete';
-    return sendRequest('DELETE', url, targetElementId, data, false, errorHandler);
-}
-},
-userrole: {
-
-get: function (targetElementId, data, errorHandler) {
-    var url = '/userrole/get';
-    return sendRequest('GET', url, targetElementId, data, false, errorHandler);
-},
-
-list: function (targetElementId, columns) {
-    var url = '/userrole/list';
-    return sendDataTableRequest('POST', url, targetElementId, null, columns);
-},
-
-add: function (targetElementId, data, errorHandler) {
-    var url = '/userrole/add';
-    return sendRequest('POST', url, targetElementId, data, false, errorHandler);
-},
-
-edit: function (targetElementId, data, errorHandler) {
-    var url = '/userrole/edit';
-    return sendRequest('PUT', url, targetElementId, data, false, errorHandler);
-},
-
-delete: function (targetElementId, data, errorHandler) {
-    var url = '/userrole/delete';
     return sendRequest('DELETE', url, targetElementId, data, false, errorHandler);
 }
 }

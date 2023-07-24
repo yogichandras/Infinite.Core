@@ -9,6 +9,8 @@ namespace INFINITE.CORE.Data
 {
     public partial class ApplicationDBContext : DbContext
     {
+        public virtual DbSet<Config> Config { get; set; }
+        public virtual DbSet<EmailTemplate> EmailTemplate { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Repository> Repository { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -22,6 +24,127 @@ namespace INFINITE.CORE.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Config>(entity =>
+            {
+                entity.ToTable("CONFIG");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ID")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.ConfigKey)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("CONFIG_KEY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.ConfigValue)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("CONFIG_VALUE")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.CreateBy)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("CREATE_BY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.CreateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("CREATE_DATE")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Module)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("MODULE")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.UpdateBy)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("UPDATE_BY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UPDATE_DATE");
+            });
+
+            modelBuilder.Entity<EmailTemplate>(entity =>
+            {
+                entity.ToTable("EMAIL_TEMPLATE");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ID")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.CreateBy)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("CREATE_BY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.CreateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("CREATE_DATE")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DisplayName)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("DISPLAY_NAME")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.MailContent)
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("MAIL_CONTENT")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.MailFrom)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("MAIL_FROM")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.Module)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("MODULE")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.Subject)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("SUBJECT")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.UpdateBy)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("UPDATE_BY")
+                    .UseCollation("Latin1_General_CI_AS");
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UPDATE_DATE");
+            });
+
             modelBuilder.Entity<Notification>(entity =>
             {
                 entity.ToTable("NOTIFICATION");

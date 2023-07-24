@@ -14,11 +14,11 @@ using Microsoft.EntityFrameworkCore;
 using INFINITE.CORE.Data;
 using INFINITE.CORE.Shared.Attributes;
 
-namespace INFINITE.CORE.Core.UserRole.Command
+namespace INFINITE.CORE.Core.Config.Command
 {
 
     #region Request
-    public class DeleteUserRoleRequest : IRequest<StatusResponse>
+    public class DeleteConfigRequest : IRequest<StatusResponse>
     {
         [Required]
         public Guid Id { get; set; }
@@ -27,30 +27,27 @@ namespace INFINITE.CORE.Core.UserRole.Command
     }
     #endregion
 
-    internal class DeleteUserRoleHandler : IRequestHandler<DeleteUserRoleRequest, StatusResponse>
+    internal class DeleteConfigHandler : IRequestHandler<DeleteConfigRequest, StatusResponse>
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IMediator _mediator;
         private readonly IUnitOfWork<ApplicationDBContext> _context;
-        public DeleteUserRoleHandler(
-            ILogger<DeleteUserRoleHandler> logger,
+        public DeleteConfigHandler(
+            ILogger<DeleteConfigHandler> logger,
             IMapper mapper,
-            IMediator mediator,
             IUnitOfWork<ApplicationDBContext> context
             )
         {
             _logger = logger;
             _mapper = mapper;
-            _mediator = mediator;
             _context = context;
         }
-        public async Task<StatusResponse> Handle(DeleteUserRoleRequest request, CancellationToken cancellationToken)
+        public async Task<StatusResponse> Handle(DeleteConfigRequest request, CancellationToken cancellationToken)
         {
             StatusResponse result = new StatusResponse();
             try
             {
-                var item = await _context.Entity<INFINITE.CORE.Data.Model.UserRole>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
+                var item = await _context.Entity<INFINITE.CORE.Data.Model.Config>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (item != null)
                 {
                     var delete = await _context.DeleteSave(item);
@@ -58,17 +55,17 @@ namespace INFINITE.CORE.Core.UserRole.Command
                         result.OK();
                     else
                         result.BadRequest(delete.Message);
-    
+
                     return result;
                 }
                 else
-                    result.NotFound($"Id UserRole {request.Id} Tidak Ditemukan");
+                    result.NotFound($"Id Config {request.Id} Tidak Ditemukan");
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed Delete UserRole", request.Id);
-                result.Error("Failed Delete UserRole", ex.Message);
+                _logger.LogError(ex, "Failed Delete Config", request.Id);
+                result.Error("Failed Delete Config", ex.Message);
             }
             return result;
         }

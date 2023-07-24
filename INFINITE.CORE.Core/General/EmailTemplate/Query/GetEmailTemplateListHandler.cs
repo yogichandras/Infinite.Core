@@ -17,18 +17,18 @@ using INFINITE.CORE.Shared.Attributes;
 using INFINITE.CORE.Core.Response;
 using INFINITE.CORE.Core.Helper;
 
-namespace INFINITE.CORE.Core.UserRole.Query
+namespace INFINITE.CORE.Core.EmailTemplate.Query
 {
-    public class GetUserRoleListRequest : ListRequest,IListRequest<GetUserRoleListRequest>,IRequest<ListResponse<UserRoleResponse>>
+    public class GetEmailTemplateListRequest : ListRequest,IListRequest<GetEmailTemplateListRequest>,IRequest<ListResponse<EmailTemplateResponse>>
     {
     }
-    internal class GetUserRoleListHandler : IRequestHandler<GetUserRoleListRequest, ListResponse<UserRoleResponse>>
+    internal class GetEmailTemplateListHandler : IRequestHandler<GetEmailTemplateListRequest, ListResponse<EmailTemplateResponse>>
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork<ApplicationDBContext> _context;
-        public GetUserRoleListHandler(
-            ILogger<GetUserRoleListHandler> logger,
+        public GetEmailTemplateListHandler(
+            ILogger<GetEmailTemplateListHandler> logger,
             IMapper mapper,
             IUnitOfWork<ApplicationDBContext> context
             )
@@ -38,18 +38,16 @@ namespace INFINITE.CORE.Core.UserRole.Query
             _context = context;
         }
 
-        public async Task<ListResponse<UserRoleResponse>> Handle(GetUserRoleListRequest request, CancellationToken cancellationToken)
+        public async Task<ListResponse<EmailTemplateResponse>> Handle(GetEmailTemplateListRequest request, CancellationToken cancellationToken)
         {
-            ListResponse<UserRoleResponse> result = new ListResponse<UserRoleResponse>();
+            ListResponse<EmailTemplateResponse> result = new ListResponse<EmailTemplateResponse>();
             try
             {
-				var query = _context.Entity<INFINITE.CORE.Data.Model.UserRole>()
-                    .Include(d => d.IdRoleNavigation)
-                    .Include(d => d.IdUserNavigation).AsQueryable();
+				var query = _context.Entity<INFINITE.CORE.Data.Model.EmailTemplate>().AsQueryable();
 
 				#region Filter
-				Expression<Func<INFINITE.CORE.Data.Model.UserRole, object>> column_sort = null;
-				List<Expression<Func<INFINITE.CORE.Data.Model.UserRole, bool>>> where = new List<Expression<Func<INFINITE.CORE.Data.Model.UserRole, bool>>>();
+				Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, object>> column_sort = null;
+				List<Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, bool>>> where = new List<Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, bool>>>();
 				if (request.Filter != null && request.Filter.Count > 0)
 				{
 					foreach (var f in request.Filter)
@@ -81,24 +79,24 @@ namespace INFINITE.CORE.Core.UserRole.Query
 					query = query.Skip((request.Start.Value - 1) * request.Length.Value).Take(request.Length.Value);
 				var data_list = await query.ToListAsync();
 
-				result.List = _mapper.Map<List<UserRoleResponse>>(data_list);
+				result.List = _mapper.Map<List<EmailTemplateResponse>>(data_list);
 				result.Filtered = data_list.Count();
 				result.Count = await query_count.CountAsync();
 				result.OK();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed Get List UserRole", request);
-                result.Error("Failed Get List UserRole", ex.Message);
+                _logger.LogError(ex, "Failed Get List EmailTemplate", request);
+                result.Error("Failed Get List EmailTemplate", ex.Message);
             }
             return result;
         }
 
         #region List Utility
-		private (Expression<Func<INFINITE.CORE.Data.Model.UserRole, bool>> where, Expression<Func<INFINITE.CORE.Data.Model.UserRole, object>> order) ListExpression(string search, string field, bool is_where)
+		private (Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, bool>> where, Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, object>> order) ListExpression(string search, string field, bool is_where)
 		{
-			Expression<Func<INFINITE.CORE.Data.Model.UserRole, object>> result_order = null;
-			Expression<Func<INFINITE.CORE.Data.Model.UserRole, bool>> result_where = null;
+			Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, object>> result_order = null;
+			Expression<Func<INFINITE.CORE.Data.Model.EmailTemplate, bool>> result_where = null;
             if (!string.IsNullOrWhiteSpace(search) && !string.IsNullOrWhiteSpace(field))
             {
                 field = field.Trim().ToLower();
@@ -107,11 +105,8 @@ namespace INFINITE.CORE.Core.UserRole.Query
                 {
 					case "id" : 
 						if(is_where){
-							if (Guid.TryParse(search, out var _Id))
-								result_where = (d=>d.Id == _Id);
-                            else
-                                result_where = (d => d.Id == Guid.Empty);
-                        }
+							result_where = (d=>d.Id.ToString().Trim().ToLower().Contains(search));
+						}
 						else
 							result_order = (d => d.Id);
 					break;
@@ -130,19 +125,55 @@ namespace INFINITE.CORE.Core.UserRole.Query
 						else
 							result_order = (d => d.CreateDate);
 					break;
-					case "idrole" : 
-						if(is_where)
-								result_where = (d=>d.IdRole == search);
-						else
-							result_order = (d => d.IdRole);
-					break;
-					case "iduser" : 
+					case "displayname" : 
 						if(is_where){
-							if (Guid.TryParse(search, out var _IdUser))
-								result_where = (d=>d.IdUser == _IdUser);
+							result_where = (d=>d.DisplayName.Trim().ToLower().Contains(search));
 						}
 						else
-							result_order = (d => d.IdUser);
+							result_order = (d => d.DisplayName);
+					break;
+					case "mailcontent" : 
+						if(is_where){
+							result_where = (d=>d.MailContent.Trim().ToLower().Contains(search));
+						}
+						else
+							result_order = (d => d.MailContent);
+					break;
+					case "mailfrom" : 
+						if(is_where){
+							result_where = (d=>d.MailFrom.Trim().ToLower().Contains(search));
+						}
+						else
+							result_order = (d => d.MailFrom);
+					break;
+					case "module" : 
+						if(is_where){
+							result_where = (d=>d.Module.Trim().ToLower().Contains(search));
+						}
+						else
+							result_order = (d => d.Module);
+					break;
+					case "subject" : 
+						if(is_where){
+							result_where = (d=>d.Subject.Trim().ToLower().Contains(search));
+						}
+						else
+							result_order = (d => d.Subject);
+					break;
+					case "updateby" : 
+						if(is_where){
+							result_where = (d=>d.UpdateBy.Trim().ToLower().Contains(search));
+						}
+						else
+							result_order = (d => d.UpdateBy);
+					break;
+					case "updatedate" : 
+						if(is_where){
+							if (DateTime.TryParse(search, out var _UpdateDate))
+								result_where = (d=>d.UpdateDate == _UpdateDate);
+						}
+						else
+							result_order = (d => d.UpdateDate);
 					break;
 
                 }

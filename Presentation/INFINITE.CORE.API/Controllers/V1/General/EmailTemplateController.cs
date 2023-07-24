@@ -7,39 +7,39 @@
 
 using Microsoft.AspNetCore.Mvc;
 using INFINITE.CORE.Shared.Attributes;
-using INFINITE.CORE.Core.UserRole.Query;
+using INFINITE.CORE.Core.EmailTemplate.Query;
 using INFINITE.CORE.Core.Request;
-using INFINITE.CORE.Core.UserRole.Command;
+using INFINITE.CORE.Core.EmailTemplate.Command;
 
 namespace INFINITE.CORE.API.Controllers
 {
-    public partial class UserRoleController : BaseController<UserRoleController>
+    public partial class EmailTemplateController : BaseController<EmailTemplateController>
     {
         [HttpGet(template: "get/{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Wrapper(await _mediator.Send(new GetUserRoleByIdRequest() { Id = id }));
+            return Wrapper(await _mediator.Send(new GetEmailTemplateByIdRequest() { Id = id }));
         }
 
         [HttpPost(template: "list")]
         public async Task<IActionResult> List([FromBody] ListRequest request)
         {
-            var list_request = _mapper.Map<GetUserRoleListRequest>(request);
+            var list_request = _mapper.Map<GetEmailTemplateListRequest>(request);
             return Wrapper(await _mediator.Send(list_request));
         }
 
         [HttpPost(template: "add")]
-        public async Task<IActionResult> Add([FromBody] UserRoleRequest request)
+        public async Task<IActionResult> Add([FromBody] EmailTemplateRequest request)
         {
-            var add_request = _mapper.Map<AddUserRoleRequest>(request);
+            var add_request = _mapper.Map<AddEmailTemplateRequest>(request);
             add_request.Inputer = Inputer;
             return Wrapper(await _mediator.Send(add_request));
         }
 
         [HttpPut(template: "edit/{id}")]
-        public async Task<IActionResult> Edit(Guid id, [FromBody] UserRoleRequest request)
+        public async Task<IActionResult> Edit(Guid id, [FromBody] EmailTemplateRequest request)
         {
-            var edit_request = _mapper.Map<EditUserRoleRequest>(request);
+            var edit_request = _mapper.Map<EditEmailTemplateRequest>(request);
             edit_request.Id = id;
             edit_request.Inputer = Inputer;
             return Wrapper(await _mediator.Send(edit_request));
@@ -48,7 +48,7 @@ namespace INFINITE.CORE.API.Controllers
         [HttpDelete(template: "delete/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            return Wrapper(await _mediator.Send(new DeleteUserRoleRequest() { Id = id, Inputer = Inputer }));
+            return Wrapper(await _mediator.Send(new DeleteEmailTemplateRequest() { Id = id, Inputer = Inputer }));
         }
 
         

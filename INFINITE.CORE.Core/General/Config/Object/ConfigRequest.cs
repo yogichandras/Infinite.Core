@@ -9,12 +9,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace INFINITE.CORE.Core.Request
 {
-    public partial class UserRoleRequest
+    public partial class ConfigRequest
     {
 		[Required]
-		public string IdRole{ get; set; }
+		public string ConfigKey{ get; set; }
 		[Required]
-		public Guid IdUser{ get; set; }
+		public string ConfigValue{ get; set; }
+		[Required]
+		public string Module{ get; set; }
 
     }
 }

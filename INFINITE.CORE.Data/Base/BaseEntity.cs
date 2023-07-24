@@ -15,10 +15,6 @@ namespace INFINITE.CORE.Data.Base
     }
     public class BaseGuidEntity : BaseEntity
     {
-        public BaseGuidEntity()
-        {
-            Id = Guid.NewGuid();
-        }
         public Guid Id { get; set; }
     }
     public class BaseIntEntity : BaseEntity
