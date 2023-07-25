@@ -96,7 +96,8 @@ INSERT INTO dbo.ROLE_PERMISSIONS (ID,ID_ROLE,PERMISSION,CREATE_BY,CREATE_DATE) V
 	 (NEWID(),N'ADM',N'Pages.Home',N'SYSTEM',getdate()),
 	 (NEWID(),N'ADM',N'Pages.Users',N'SYSTEM',getdate()),
 	 (NEWID(),N'ADM',N'Pages.Roles',N'SYSTEM',getdate()),
-	 (NEWID(),N'ADM',N'Pages.Config',N'SYSTEM',getdate());
+	 (NEWID(),N'ADM',N'Pages.Config',N'SYSTEM',getdate()),
+	 (NEWID(),N'ADM',N'Pages.Email.Template',N'SYSTEM',getdate());
 
 CREATE TABLE [INFINITE.CORE].dbo.[CONFIG] (
 	ID uniqueidentifier DEFAULT newid() NOT NULL,

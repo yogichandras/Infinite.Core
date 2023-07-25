@@ -8,6 +8,7 @@ namespace INFINITE.CORE.Data.Provider
         public const string Pages_Users = "Pages.Users";
         public const string Pages_Roles = "Pages.Roles";
         public const string Pages_Config = "Pages.Config";
+        public const string Pages_Email_Template = "Pages.Email.Template";
     }
 
     public static class Permissions

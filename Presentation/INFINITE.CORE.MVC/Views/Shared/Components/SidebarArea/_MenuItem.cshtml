@@ -71,6 +71,7 @@ else if (hasSubMenus && isAuthenticated)
             <ul class="nav nav-treeview">
                 @foreach (var subMenu in subMenus)
                 {
+                    subMenu.AuthenticatedPermissions = Model.AuthenticatedPermissions;
                     @await Html.PartialAsync("Components/SidebarArea/_MenuItem", subMenu)
                 }
             </ul>

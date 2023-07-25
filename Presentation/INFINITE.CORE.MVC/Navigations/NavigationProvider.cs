@@ -32,9 +32,23 @@ namespace INFINITE.CORE.MVC.Navigations
                 ).AddItem(
                     new NavigationDefinition(
                         title: Pages.Config,
-                        url: "Config",
+                        url: "#",
                         icon: "fas fa-cogs",
-                        requiredPermissions: new List<string> { PermissionNames.Pages_Config }
+                        requiredPermissions: new List<string> { PermissionNames.Pages_Config, PermissionNames.Pages_Email_Template }
+                    ).AddItem(
+                        new NavigationDefinition(
+                            title: Pages.AppConfig,
+                            url: "Config",
+                            icon: "",
+                            requiredPermissions: new List<string> { PermissionNames.Pages_Config }
+                        )
+                    ).AddItem(
+                        new NavigationDefinition(
+                            title: Pages.EmailTemplate,
+                            url: "EmailTemplate",
+                            icon: "",
+                            requiredPermissions: new List<string> { PermissionNames.Pages_Email_Template }
+                        )
                     )
                 );
         }
