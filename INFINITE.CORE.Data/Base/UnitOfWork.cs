@@ -15,6 +15,12 @@ namespace INFINITE.CORE.Data.Base
         }
         public IQueryable<TEntity> Entity<TEntity>() where TEntity : class, IEntity
         {
+            var isSoftDelete = typeof(TEntity).GetInterfaces().Any(x => x == typeof(ISoftEntity));
+            if (isSoftDelete)
+            {
+                return _context.Set<TEntity>().Where(x => ((ISoftEntity)x).Active);
+            }
+            
             return _context.Set<TEntity>();
         }
         public async Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> Commit()
@@ -57,6 +63,11 @@ namespace INFINITE.CORE.Data.Base
         #region Add
         public void Add<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
+            var isSoftDelete = typeof(TEntity).GetInterfaces().Any(x => x == typeof(ISoftEntity));
+            if (isSoftDelete)
+            {
+                ((ISoftEntity)entity).Active = true;
+            }
             _context.Set<TEntity>().Add(entity);
         }
 
@@ -160,6 +171,52 @@ namespace INFINITE.CORE.Data.Base
             try
             {
                 _context.Set<TEntity>().RemoveRange(items);
+                return await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message, ex, null);
+            }
+        }
+
+        public void SoftDelete<TEntity>(TEntity entity) where TEntity : class, ISoftEntity
+        {
+            entity.Active = false;
+            _context.Set<TEntity>().Update(entity);
+        }
+        
+        public void SoftDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class, ISoftEntity
+        {
+            foreach (var item in items)
+            {
+                item.Active = false;
+            }
+            _context.Set<TEntity>().UpdateRange(items);
+        }
+
+        public async Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> SoftDeleteSave<TEntity>(TEntity entity) where TEntity : class, ISoftEntity
+        {
+            try
+            {
+                entity.Active = false;
+                _context.Set<TEntity>().Update(entity);
+                return await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message, ex, null);
+            }
+        }
+
+        public async Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> SoftDeleteSave<TEntity>(IEnumerable<TEntity> items) where TEntity : class, ISoftEntity
+        {
+            try
+            {
+                foreach (var item in items)
+                {
+                    item.Active = false;
+                }
+                _context.Set<TEntity>().UpdateRange(items);
                 return await SaveChanges();
             }
             catch (Exception ex)

@@ -5,7 +5,7 @@ using INFINITE.CORE.Data.Base.Interface;
 
 namespace INFINITE.CORE.Data.Model 
 {
-    public partial class User : IEntity
+    public partial class User : ISoftEntity
     {
         public User()
         {

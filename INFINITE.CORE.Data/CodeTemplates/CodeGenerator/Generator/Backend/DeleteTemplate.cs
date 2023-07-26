@@ -58,10 +58,13 @@ namespace INFINITE.CORE.Data.CodeGenerator.Generator
                         if (string.IsNullOrWhiteSpace(primary_type))
                             primary_type = list_properties.Where(d => d.Name.ToLower() == ("id")).Select(d => ParseType(d.ClrType)).FirstOrDefault()!;
 
+                        bool isSoftDelete = list_properties.Any(d => d.Name.ToLower() == ("active"));
+                        
                         code = code.Replace("{{primary_key_type}}", primary_type);
                         code = code.Replace("{{name}}", name);
                         code = code.Replace("{{model}}", model_name);
                         code = code.Replace("{{schema}}", schema);
+                        code = code.Replace("{{method}}", isSoftDelete ? "SoftDeleteSave" : "DeleteSave");
 
                         using (StreamWriter outputFile = new StreamWriter(code_file))
                         {

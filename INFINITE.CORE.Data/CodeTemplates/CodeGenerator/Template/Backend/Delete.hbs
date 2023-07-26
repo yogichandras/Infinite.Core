@@ -50,7 +50,7 @@ namespace {{namespace}}Core.{{name}}.Command
                 var item = await _context.Entity<{{namespace}}Data.Model.{{model}}>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (item != null)
                 {
-                    var delete = await _context.DeleteSave(item);
+                    var delete = await _context.{{method}}(item);
                     if (delete.Success)
                         result.OK();
                     else
