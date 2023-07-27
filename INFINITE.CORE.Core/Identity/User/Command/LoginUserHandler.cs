@@ -63,11 +63,6 @@ namespace INFINITE.CORE.Core.User.Command
 
                 if (user != null)
                 {
-                    if (!user.Active)
-                    {
-                        result.Forbidden($"User not active please call administrator for verified user!");
-                        return result;
-                    }
                     if (user.IsLockout)
                     {
                         result.Forbidden($"User has been Locked! call administrator for unlock!");

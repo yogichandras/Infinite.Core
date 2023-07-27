@@ -114,14 +114,6 @@ namespace INFINITE.CORE.Core.Role.Query
 						else
 							result_order = (d => d.Id);
 					break;
-					case "active" : 
-						if(is_where){
-							if (bool.TryParse(search, out var _Active))
-								result_where = (d=>d.Active == _Active);
-						}
-						else
-							result_order = (d => d.Active);
-					break;
 					case "createby" : 
 						if(is_where){
 							result_where = (d=>d.CreateBy.Trim().ToLower().Contains(search));

@@ -18,7 +18,7 @@ namespace INFINITE.CORE.Data.Base
             var isSoftDelete = typeof(TEntity).GetInterfaces().Any(x => x == typeof(ISoftEntity));
             if (isSoftDelete)
             {
-                return _context.Set<TEntity>().Where(x => ((ISoftEntity)x).Active);
+                return _context.Set<TEntity>().Where(x => !((ISoftEntity)x).IsDeleted);
             }
             
             return _context.Set<TEntity>();
@@ -66,7 +66,7 @@ namespace INFINITE.CORE.Data.Base
             var isSoftDelete = typeof(TEntity).GetInterfaces().Any(x => x == typeof(ISoftEntity));
             if (isSoftDelete)
             {
-                ((ISoftEntity)entity).Active = true;
+                ((ISoftEntity)entity).IsDeleted = false;
             }
             _context.Set<TEntity>().Add(entity);
         }
@@ -181,7 +181,7 @@ namespace INFINITE.CORE.Data.Base
 
         public void SoftDelete<TEntity>(TEntity entity) where TEntity : class, ISoftEntity
         {
-            entity.Active = false;
+            entity.IsDeleted = true;
             _context.Set<TEntity>().Update(entity);
         }
         
@@ -189,7 +189,7 @@ namespace INFINITE.CORE.Data.Base
         {
             foreach (var item in items)
             {
-                item.Active = false;
+                item.IsDeleted = true;
             }
             _context.Set<TEntity>().UpdateRange(items);
         }
@@ -198,7 +198,7 @@ namespace INFINITE.CORE.Data.Base
         {
             try
             {
-                entity.Active = false;
+                entity.IsDeleted = true;
                 _context.Set<TEntity>().Update(entity);
                 return await SaveChanges();
             }
@@ -214,7 +214,7 @@ namespace INFINITE.CORE.Data.Base
             {
                 foreach (var item in items)
                 {
-                    item.Active = false;
+                    item.IsDeleted = true;
                 }
                 _context.Set<TEntity>().UpdateRange(items);
                 return await SaveChanges();

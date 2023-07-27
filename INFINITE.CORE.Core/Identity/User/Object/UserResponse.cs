@@ -29,8 +29,6 @@ namespace INFINITE.CORE.Core.Response
         }
         private string CheckStatus(INFINITE.CORE.Data.Model.User s)
         {
-            if (!s.Active)
-                return "Not Active";
             if (s.IsLockout)
                 return "Locked";
             else

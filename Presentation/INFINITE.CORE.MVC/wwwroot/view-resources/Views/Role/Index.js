@@ -35,14 +35,10 @@
         },
         {
             targets: 3,
-            data: 'Active'
-        },
-        {
-            targets: 4,
             data: 'CreateByWithUserNameOnly'
         },
         {
-            targets: 5,
+            targets: 4,
             data: null,
             defaultContent: '',
             render: (data, type, row, meta) => {
@@ -50,12 +46,12 @@
             }
         },
         {
-            targets: 6,
+            targets: 5,
             data: 'UpdateByWithUserNameOnly',
             defaultContent: '',
         },
         {
-            targets: 7,
+            targets: 6,
             data: null,
             defaultContent: '',
             render: (data, type, row, meta) => {
@@ -64,7 +60,7 @@
             }
         },
         {
-            targets: 8,
+            targets: 7,
             data: null,
             sortable: false,
             autoWidth: false,
@@ -99,11 +95,6 @@
             }
         }
         delete role.permissions;
-        if (role.Active) {
-            role.Active = true;
-        } else {
-            role.Active = false;
-        }
         
         service.role.add(_$formCreate, role, function (error) {
             showError('Error', 'Failed to Add Role');
@@ -156,11 +147,6 @@
             }
         }
         delete role.permissions;
-        if (role.Active) {
-            role.Active = true;
-        } else {
-            role.Active = false;
-        }
 
         service.role.edit(_$formEdit, role, function (error) {
             showError('Error', 'Failed to Edit Role');

@@ -146,12 +146,8 @@ namespace INFINITE.CORE.Core.User.Query
                         break;
 					case "status" : 
 						if(is_where){
-                            if(search == "not active")
-                                result_where = (d => !d.Active);
                             if (search == "Locked")
                                 result_where = (d => d.IsLockout);
-                            if (search == "Active")
-                                result_where = (d => !d.IsLockout && d.Active);
 						}
 						else
 							result_order = (d => d.UpdateDate);
