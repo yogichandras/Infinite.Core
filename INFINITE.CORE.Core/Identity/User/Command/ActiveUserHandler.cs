@@ -41,7 +41,6 @@ namespace INFINITE.CORE.Core.User.Command
                 var item = await _context.Entity<Data.Model.User>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (item != null)
                 {
-                    item.Active = request.Active;
                     item.UpdateBy = request.Inputer;
                     item.UpdateDate = DateTime.Now;
                     var update = await _context.UpdateSave(item);

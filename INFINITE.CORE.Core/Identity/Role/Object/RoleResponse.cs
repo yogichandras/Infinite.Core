@@ -19,7 +19,6 @@ namespace INFINITE.CORE.Core.Response
 {
     public partial class RoleResponse: BaseStringEntity, IMapResponse<RoleResponse, INFINITE.CORE.Data.Model.Role>
     {
-		public bool Active{ get; set; }
 		public string Name{ get; set; }
         public List<string> Permissions { get; set; }
 

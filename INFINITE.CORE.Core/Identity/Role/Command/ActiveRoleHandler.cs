@@ -52,7 +52,6 @@ namespace INFINITE.CORE.Core.Role.Command
                 var item = await _context.Entity<INFINITE.CORE.Data.Model.Role>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (item != null)
                 {
-                    item.Active = request.Active;
                     item.UpdateBy = request.Inputer;
                     item.UpdateDate = DateTime.Now;
                     var update = await _context.UpdateSave(item);

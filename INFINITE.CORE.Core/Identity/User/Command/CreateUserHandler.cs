@@ -63,7 +63,6 @@ namespace INFINITE.CORE.Core.User.Command
                     Password = _hash_default_password,
                     IsLockout = false,
                     AccessFailedCount = 0,
-                    Active = true,
                     CreateBy = request.Username,
                     CreateDate = DateTime.Now,
                     UpdateBy = request.Username,

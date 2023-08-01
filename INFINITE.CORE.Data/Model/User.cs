@@ -5,7 +5,7 @@ using INFINITE.CORE.Data.Base.Interface;
 
 namespace INFINITE.CORE.Data.Model 
 {
-    public partial class User : IEntity
+    public partial class User : ISoftEntity
     {
         public User()
         {
@@ -22,7 +22,7 @@ namespace INFINITE.CORE.Data.Model
         public string Token { get; set; }
         public bool IsLockout { get; set; }
         public int AccessFailedCount { get; set; }
-        public bool Active { get; set; }
+        public bool IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }

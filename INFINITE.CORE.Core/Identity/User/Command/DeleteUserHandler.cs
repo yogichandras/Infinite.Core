@@ -47,7 +47,7 @@ namespace INFINITE.CORE.Core.Identity.User.Command
                 var item = await _context.Entity<INFINITE.CORE.Data.Model.User>().Where(d => d.Id == request.Id).FirstOrDefaultAsync();
                 if (item != null)
                 {
-                    var delete = await _context.DeleteSave(item);
+                    var delete = await _context.SoftDeleteSave(item);
                     if (delete.Success)
                         result.OK();
                     else

@@ -18,8 +18,12 @@ namespace INFINITE.CORE.Data.Base.Interface
         Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> UpdateSave<TEntity>(IEnumerable<TEntity> items) where TEntity : class, IEntity;
         void Delete<TEntity>(TEntity entity) where TEntity : class, IEntity;
         void Delete<TEntity>(IEnumerable<TEntity> items) where TEntity : class, IEntity;
+        void SoftDelete<TEntity>(TEntity entity) where TEntity : class, ISoftEntity;
+        void SoftDelete<TEntity>(IEnumerable<TEntity> items) where TEntity : class, ISoftEntity;
         Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> DeleteSave<TEntity>(TEntity entity) where TEntity : class, IEntity;
         Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> DeleteSave<TEntity>(IEnumerable<TEntity> items) where TEntity : class, IEntity;
+        Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> SoftDeleteSave<TEntity>(TEntity entity) where TEntity : class, ISoftEntity;
+        Task<(bool Success, string Message, Exception? ex, List<ChangeLog>? log)> SoftDeleteSave<TEntity>(IEnumerable<TEntity> items) where TEntity : class, ISoftEntity;
         Task<List<TEntity>> List<TEntity>(IQueryable<TEntity> query) where TEntity : IEntity;
         Task<TEntity> Single<TEntity>(IQueryable<TEntity> query) where TEntity : IEntity;
         Task<int> Count<TEntity>(IQueryable<TEntity> query) where TEntity : IEntity;

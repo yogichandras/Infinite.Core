@@ -52,7 +52,7 @@ namespace INFINITE.CORE.API
                 .WriteTo.File(
                     new CompactJsonFormatter(),
                     path: Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log", "Application_.json"),
-                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
+                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
                     fileSizeLimitBytes: 524288000,
                     rollingInterval: RollingInterval.Day
                 )
@@ -214,6 +214,12 @@ namespace INFINITE.CORE.API
                 });
             }
 
+            app.Use(async (context, next) => {
+                context.Request.EnableBuffering();
+                await next();
+            });
+            
+            app.UseMiddleware<AuditLogMiddleware>();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

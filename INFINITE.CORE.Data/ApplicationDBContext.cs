@@ -285,7 +285,7 @@ namespace INFINITE.CORE.Data
                     .HasColumnName("ID")
                     .UseCollation("Latin1_General_CI_AS");
 
-                entity.Property(e => e.Active).HasColumnName("ACTIVE");
+                entity.Property(e => e.IsDeleted).HasColumnName("IS_DELETED");
 
                 entity.Property(e => e.CreateBy)
                     .IsRequired()
@@ -367,7 +367,7 @@ namespace INFINITE.CORE.Data
 
                 entity.Property(e => e.AccessFailedCount).HasColumnName("ACCESS_FAILED_COUNT");
 
-                entity.Property(e => e.Active).HasColumnName("ACTIVE");
+                entity.Property(e => e.IsDeleted).HasColumnName("IS_DELETED");
 
                 entity.Property(e => e.CreateBy)
                     .IsRequired()
