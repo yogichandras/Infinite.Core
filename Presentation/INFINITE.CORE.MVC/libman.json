@@ -78,7 +78,7 @@
 			]
 		},
 		{
-			"library": "datatables.net-bs4@3.2.2",
+			"library": "datatables.net-bs4@1.10.25",
 			"destination": "wwwroot/plugins/datatables-bs4/"
 		},
 		{
