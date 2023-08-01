@@ -1,0 +1,752 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+	"libraries": [
+		{
+			"library": "bootstrap@4.6.1",
+			"destination": "wwwroot/plugins/bootstrap/",
+			"files": [
+				"js/bootstrap.bundle.js",
+				"js/bootstrap.bundle.js.map",
+				"js/bootstrap.bundle.min.js",
+				"js/bootstrap.bundle.min.js.map",
+				"js/bootstrap.js",
+				"js/bootstrap.js.map",
+				"js/bootstrap.min.js",
+				"js/bootstrap.min.js.map"
+			]
+		},
+		{
+			"library": "bootstrap-colorpicker@3.4.0",
+			"destination": "wwwroot/plugins/bootstrap-colorpicker/"
+		},
+		{
+			"library": "bootstrap-slider@11.0.2",
+			"destination": "wwwroot/plugins/bootstrap-slider/"
+		},
+		{
+			"library": "bootstrap-switch@3.3.4",
+			"destination": "wwwroot/plugins/bootstrap-switch/"
+		},
+		{
+			"library": "bootstrap4-duallistbox@4.0.2",
+			"destination": "wwwroot/plugins/bootstrap4-duallistbox/"
+		},
+		{
+			"library": "bs-custom-file-input@1.3.4",
+			"destination": "wwwroot/plugins/bs-custom-file-input/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "bs-stepper@1.7.0",
+			"destination": "wwwroot/plugins/bs-stepper/",
+			"files": [
+				"dist/css/bs-stepper.css",
+				"dist/css/bs-stepper.css.map",
+				"dist/css/bs-stepper.min.css",
+				"dist/css/bs-stepper.min.css.map",
+				"dist/js/bs-stepper.js",
+				"dist/js/bs-stepper.js.map",
+				"dist/js/bs-stepper.min.js",
+				"dist/js/bs-stepper.min.js.map"
+			]
+		},
+		{
+			"library": "Chart.js@2.9.4",
+			"destination": "wwwroot/plugins/chart.js/"
+		},
+		{
+			"library": "codemirror@6.65.7",
+			"destination": "wwwroot/plugins/codemirror/"
+		},
+		{
+			"library": "datatables.net@1.11.4",
+			"destination": "wwwroot/plugins/datatables/"
+		},
+		{
+			"library": "datatables.net-autofill@2.3.9",
+			"destination": "wwwroot/plugins/datatables-autofill/"
+		},
+		{
+			"library": "datatables.net-autofill-bs4@2.6.0",
+			"destination": "wwwroot/plugins/datatables-autofill/",
+			"files": [
+				"autoFill.bootstrap4.min.js",
+				"autoFill.bootstrap4.js",
+				"autoFill.bootstrap4.min.css",
+				"autoFill.bootstrap4.css"
+			]
+		},
+		{
+			"library": "datatables.net-bs4@3.2.2",
+			"destination": "wwwroot/plugins/datatables-bs4/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables-buttons@2.2.2",
+			"destination": "wwwroot/plugins/datatables-buttons/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-buttons-bs4@2.4.1",
+			"destination": "wwwroot/plugins/datatables-buttons/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-colreorder-bs4@1.7.0",
+			"destination": "wwwroot/plugins/datatables.net-colreorder-bs4/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-colreorder@1.5.4",
+			"destination": "wwwroot/plugins/datatables-colreorder/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-fixedcolumns@4.0.0",
+			"destination": "wwwroot/plugins/datatables-fixedcolumns/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-fixedcolumns-bs4@4.0.1",
+			"destination": "wwwroot/plugins/datatables-fixedcolumns/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-fixedheader@3.2.1",
+			"destination": "wwwroot/plugins/datatables-fixedheader/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-fixedheader-bs4@3.4.0",
+			"destination": "wwwroot/plugins/datatables-fixedheader/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-keytable@2.6.4",
+			"destination": "wwwroot/plugins/datatables-keytable/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-keytable-bs4@2.10.0",
+			"destination": "wwwroot/plugins/datatables-keytable/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-responsive@2.2.9",
+			"destination": "wwwroot/plugins/datatables-responsive/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-responsive-bs4@2.5.0",
+			"destination": "wwwroot/plugins/datatables-responsive/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-rowgroup@1.1.3",
+			"destination": "wwwroot/plugins/datatables-rowgroup/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-rowgroup-bs4@1.4.0",
+			"destination": "wwwroot/plugins/datatables-rowgroup/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-rowreorder@1.2.8",
+			"destination": "wwwroot/plugins/datatables-rowreorder/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-rowreorder-bs4@1.4.1",
+			"destination": "wwwroot/plugins/datatables-rowreorder/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-scroller@2.0.5",
+			"destination": "wwwroot/plugins/datatables-scroller/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "datatables.net-scroller-bs4@2.2.0",
+			"destination": "wwwroot/plugins/datatables-scroller/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-searchbuilder@1.3.1",
+			"destination": "wwwroot/plugins/datatables-searchbuilder/",
+			"files": [
+				"js/dataTables.searchBuilder.js",
+				"js/dataTables.searchBuilder.min.js"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-searchbuilder-bs4@1.5.0",
+			"destination": "wwwroot/plugins/datatables-searchbuilder/",
+			"files": [
+				"css/searchBuilder.bootstrap4.css",
+				"css/searchBuilder.bootstrap4.min.css",
+				"js/searchBuilder.bootstrap4.js",
+				"js/searchBuilder.bootstrap4.min.js",
+				"js/searchBuilder.bootstrap4.min.mjs",
+				"js/searchBuilder.bootstrap4.mjs"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-searchpanes@1.4.0",
+			"destination": "wwwroot/plugins/datatables-searchpanes/",
+			"files": [
+				"js/dataTables.searchPanes.js",
+				"js/dataTables.searchPanes.min.js"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-searchpanes-bs4@2.2.0",
+			"destination": "wwwroot/plugins/datatables-searchpanes/",
+			"files": [
+				"css/searchPanes.bootstrap4.css",
+				"css/searchPanes.bootstrap4.min.css",
+				"js/searchPanes.bootstrap4.js",
+				"js/searchPanes.bootstrap4.min.js",
+				"js/searchPanes.bootstrap4.min.mjs",
+				"js/searchPanes.bootstrap4.mjs"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-select@1.3.4",
+			"destination": "wwwroot/plugins/datatables-select/",
+			"files": [
+				"js/dataTables.select.js",
+				"js/dataTables.select.min.js"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "datatables.net-select-bs4@1.7.0",
+			"destination": "wwwroot/plugins/datatables-select/",
+			"files": [
+				"css/select.bootstrap4.css",
+				"css/select.bootstrap4.min.css",
+				"js/select.bootstrap4.js",
+				"js/select.bootstrap4.min.js",
+				"js/select.bootstrap4.min.mjs",
+				"js/select.bootstrap4.mjs"
+			]
+		},
+		{
+			"provider": "cdnjs",
+			"library": "bootstrap-daterangepicker@3.0.5",
+			"destination": "wwwroot/plugins/daterangepicker/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "dropzone@5.9.3",
+			"destination": "wwwroot/plugins/dropzone/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "ekko-lightbox@5.3.0",
+			"destination": "wwwroot/plugins/ekko-lightbox/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "fastclick@1.0.6",
+			"destination": "wwwroot/plugins/fastclick/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "filterizr@2.2.4",
+			"destination": "wwwroot/plugins/filterizr/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "flag-icon-css@6.9.2",
+			"destination": "wwwroot/plugins/flag-icon-css/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "flot@4.2.6",
+			"destination": "wwwroot/plugins/flot/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "@fortawesome/fontawesome-free@6.4.0",
+			"destination": "wwwroot/plugins/fontawesome-free/",
+			"files": [
+				"css/all.css",
+				"css/all.min.css",
+				"css/brands.css",
+				"css/brands.min.css",
+				"css/fontawesome.css",
+				"css/fontawesome.min.css",
+				"css/regular.css",
+				"css/regular.min.css",
+				"css/solid.css",
+				"css/solid.min.css",
+				"css/svg-with-js.css",
+				"css/svg-with-js.min.css",
+				"css/v4-font-face.css",
+				"css/v4-font-face.min.css",
+				"css/v4-shims.css",
+				"css/v4-shims.min.css",
+				"css/v5-font-face.css",
+				"css/v5-font-face.min.css",
+				"webfonts/fa-brands-400.ttf",
+				"webfonts/fa-brands-400.woff2",
+				"webfonts/fa-regular-400.ttf",
+				"webfonts/fa-regular-400.woff2",
+				"webfonts/fa-solid-900.ttf",
+				"webfonts/fa-solid-900.woff2",
+				"webfonts/fa-v4compatibility.ttf",
+				"webfonts/fa-v4compatibility.woff2"
+			]
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "fullcalendar@5.10.1",
+			"destination": "wwwroot/plugins/fullcalendar/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "icheck-bootstrap@3.0.1",
+			"destination": "wwwroot/plugins/icheck-bootstrap/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "inputmask@5.0.7",
+			"destination": "wwwroot/plugins/inputmask/",
+			"files": [
+				"dist/inputmask.es6.js",
+				"dist/inputmask.es6.min.js",
+				"dist/inputmask.js",
+				"dist/inputmask.min.js",
+				"dist/jquery.inputmask.js",
+				"dist/jquery.inputmask.min.js",
+				"dist/bindings/inputmask.binding.min.js",
+				"dist/bindings/inputmask.binding.js"
+			]
+		},
+		{
+			"provider": "cdnjs",
+			"library": "ion-rangeslider@2.3.1",
+			"destination": "wwwroot/plugins/ion-rangeslider/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jquery@3.6.0",
+			"destination": "wwwroot/plugins/jquery/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jQuery-Knob@1.2.13",
+			"destination": "wwwroot/plugins/jquery-knob/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jquery-mapael@2.2.0",
+			"destination": "wwwroot/plugins/jquery-mapael/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jquery-mousewheel@3.1.13",
+			"destination": "wwwroot/plugins/jquery-mousewheel/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "jqueryui@1.11.1",
+			"destination": "wwwroot/plugins/jquery-ui/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "jquery-validation@1.19.5",
+			"destination": "wwwroot/plugins/jquery-validation/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jqvmap@1.5.1",
+			"destination": "wwwroot/plugins/jqvmap/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jsgrid@1.5.3",
+			"destination": "wwwroot/plugins/jsgrid/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "jszip@3.7.1",
+			"destination": "wwwroot/plugins/jszip/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "moment@2.29.4",
+			"destination": "wwwroot/plugins/moment/",
+			"files": [
+				"min/locales.js",
+				"min/locales.min.js",
+				"min/locales.min.js.map",
+				"min/moment-with-locales.js",
+				"min/moment-with-locales.min.js",
+				"min/moment-with-locales.min.js.map",
+				"min/moment.min.js",
+				"min/moment.min.js.map",
+				"locale/af.js",
+				"locale/af.min.js",
+				"locale/ar-dz.js",
+				"locale/ar-dz.min.js",
+				"locale/ar-kw.js",
+				"locale/ar-kw.min.js",
+				"locale/ar-ly.js",
+				"locale/ar-ly.min.js",
+				"locale/ar-ma.js",
+				"locale/ar-ma.min.js",
+				"locale/ar-sa.js",
+				"locale/ar-sa.min.js",
+				"locale/ar-tn.js",
+				"locale/ar-tn.min.js",
+				"locale/ar.js",
+				"locale/ar.min.js",
+				"locale/az.js",
+				"locale/az.min.js",
+				"locale/be.js",
+				"locale/be.min.js",
+				"locale/bg.js",
+				"locale/bg.min.js",
+				"locale/bm.js",
+				"locale/bm.min.js",
+				"locale/bn-bd.js",
+				"locale/bn-bd.min.js",
+				"locale/bn.js",
+				"locale/bn.min.js",
+				"locale/bo.js",
+				"locale/bo.min.js",
+				"locale/br.js",
+				"locale/br.min.js",
+				"locale/bs.js",
+				"locale/bs.min.js",
+				"locale/ca.js",
+				"locale/ca.min.js",
+				"locale/cs.js",
+				"locale/cs.min.js",
+				"locale/cv.js",
+				"locale/cv.min.js",
+				"locale/cy.js",
+				"locale/cy.min.js",
+				"locale/da.js",
+				"locale/da.min.js",
+				"locale/de-at.js",
+				"locale/de-at.min.js",
+				"locale/de-ch.js",
+				"locale/de-ch.min.js",
+				"locale/de.js",
+				"locale/de.min.js",
+				"locale/dv.js",
+				"locale/dv.min.js",
+				"locale/el.js",
+				"locale/el.min.js",
+				"locale/en-au.js",
+				"locale/en-au.min.js",
+				"locale/en-ca.js",
+				"locale/en-ca.min.js",
+				"locale/en-gb.js",
+				"locale/en-gb.min.js",
+				"locale/en-ie.js",
+				"locale/en-ie.min.js",
+				"locale/en-il.js",
+				"locale/en-il.min.js",
+				"locale/en-in.js",
+				"locale/en-in.min.js",
+				"locale/en-nz.js",
+				"locale/en-nz.min.js",
+				"locale/en-sg.js",
+				"locale/en-sg.min.js",
+				"locale/eo.js",
+				"locale/eo.min.js",
+				"locale/es-do.js",
+				"locale/es-do.min.js",
+				"locale/es-mx.js",
+				"locale/es-mx.min.js",
+				"locale/es-us.js",
+				"locale/es-us.min.js",
+				"locale/es.js",
+				"locale/es.min.js",
+				"locale/et.js",
+				"locale/et.min.js",
+				"locale/eu.js",
+				"locale/eu.min.js",
+				"locale/fa.js",
+				"locale/fa.min.js",
+				"locale/fi.js",
+				"locale/fi.min.js",
+				"locale/fil.js",
+				"locale/fil.min.js",
+				"locale/fo.js",
+				"locale/fo.min.js",
+				"locale/fr-ca.js",
+				"locale/fr-ca.min.js",
+				"locale/fr-ch.js",
+				"locale/fr-ch.min.js",
+				"locale/fr.js",
+				"locale/fr.min.js",
+				"locale/fy.js",
+				"locale/fy.min.js",
+				"locale/ga.js",
+				"locale/ga.min.js",
+				"locale/gd.js",
+				"locale/gd.min.js",
+				"locale/gl.js",
+				"locale/gl.min.js",
+				"locale/gom-deva.js",
+				"locale/gom-deva.min.js",
+				"locale/gom-latn.js",
+				"locale/gom-latn.min.js",
+				"locale/gu.js",
+				"locale/gu.min.js",
+				"locale/he.js",
+				"locale/he.min.js",
+				"locale/hi.js",
+				"locale/hi.min.js",
+				"locale/hr.js",
+				"locale/hr.min.js",
+				"locale/hu.js",
+				"locale/hu.min.js",
+				"locale/hy-am.js",
+				"locale/hy-am.min.js",
+				"locale/id.js",
+				"locale/id.min.js",
+				"locale/is.js",
+				"locale/is.min.js",
+				"locale/it-ch.js",
+				"locale/it-ch.min.js",
+				"locale/it.js",
+				"locale/it.min.js",
+				"locale/ja.js",
+				"locale/ja.min.js",
+				"locale/jv.js",
+				"locale/jv.min.js",
+				"locale/ka.js",
+				"locale/ka.min.js",
+				"locale/kk.js",
+				"locale/kk.min.js",
+				"locale/km.js",
+				"locale/km.min.js",
+				"locale/kn.js",
+				"locale/kn.min.js",
+				"locale/ko.js",
+				"locale/ko.min.js",
+				"locale/ku.js",
+				"locale/ku.min.js",
+				"locale/ky.js",
+				"locale/ky.min.js",
+				"locale/lb.js",
+				"locale/lb.min.js",
+				"locale/lo.js",
+				"locale/lo.min.js",
+				"locale/lt.js",
+				"locale/lt.min.js",
+				"locale/lv.js",
+				"locale/lv.min.js",
+				"locale/me.js",
+				"locale/me.min.js",
+				"locale/mi.js",
+				"locale/mi.min.js",
+				"locale/mk.js",
+				"locale/mk.min.js",
+				"locale/ml.js",
+				"locale/ml.min.js",
+				"locale/mn.js",
+				"locale/mn.min.js",
+				"locale/mr.js",
+				"locale/mr.min.js",
+				"locale/ms-my.js",
+				"locale/ms-my.min.js",
+				"locale/ms.js",
+				"locale/ms.min.js",
+				"locale/mt.js",
+				"locale/mt.min.js",
+				"locale/my.js",
+				"locale/my.min.js",
+				"locale/nb.js",
+				"locale/nb.min.js",
+				"locale/ne.js",
+				"locale/ne.min.js",
+				"locale/nl-be.js",
+				"locale/nl-be.min.js",
+				"locale/nl.js",
+				"locale/nl.min.js",
+				"locale/nn.js",
+				"locale/nn.min.js",
+				"locale/oc-lnc.js",
+				"locale/oc-lnc.min.js",
+				"locale/pa-in.js",
+				"locale/pa-in.min.js",
+				"locale/pl.js",
+				"locale/pl.min.js",
+				"locale/pt-br.js",
+				"locale/pt-br.min.js",
+				"locale/pt.js",
+				"locale/pt.min.js",
+				"locale/ro.js",
+				"locale/ro.min.js",
+				"locale/ru.js",
+				"locale/ru.min.js",
+				"locale/sd.js",
+				"locale/sd.min.js",
+				"locale/se.js",
+				"locale/se.min.js",
+				"locale/si.js",
+				"locale/si.min.js",
+				"locale/sk.js",
+				"locale/sk.min.js",
+				"locale/sl.js",
+				"locale/sl.min.js",
+				"locale/sq.js",
+				"locale/sq.min.js",
+				"locale/sr-cyrl.js",
+				"locale/sr-cyrl.min.js",
+				"locale/sr.js",
+				"locale/sr.min.js",
+				"locale/ss.js",
+				"locale/ss.min.js",
+				"locale/sv.js",
+				"locale/sv.min.js",
+				"locale/sw.js",
+				"locale/sw.min.js",
+				"locale/ta.js",
+				"locale/ta.min.js",
+				"locale/te.js",
+				"locale/te.min.js",
+				"locale/tet.js",
+				"locale/tet.min.js",
+				"locale/tg.js",
+				"locale/tg.min.js",
+				"locale/th.js",
+				"locale/th.min.js",
+				"locale/tk.js",
+				"locale/tk.min.js",
+				"locale/tl-ph.js",
+				"locale/tl-ph.min.js",
+				"locale/tlh.js",
+				"locale/tlh.min.js",
+				"locale/tr.js",
+				"locale/tr.min.js",
+				"locale/tzl.js",
+				"locale/tzl.min.js",
+				"locale/tzm-latn.js",
+				"locale/tzm-latn.min.js",
+				"locale/tzm.js",
+				"locale/tzm.min.js",
+				"locale/ug-cn.js",
+				"locale/ug-cn.min.js",
+				"locale/uk.js",
+				"locale/uk.min.js",
+				"locale/ur.js",
+				"locale/ur.min.js",
+				"locale/uz-latn.js",
+				"locale/uz-latn.min.js",
+				"locale/uz.js",
+				"locale/uz.min.js",
+				"locale/vi.js",
+				"locale/vi.min.js",
+				"locale/x-pseudo.js",
+				"locale/x-pseudo.min.js",
+				"locale/yo.js",
+				"locale/yo.min.js",
+				"locale/zh-cn.js",
+				"locale/zh-cn.min.js",
+				"locale/zh-hk.js",
+				"locale/zh-hk.min.js",
+				"locale/zh-mo.js",
+				"locale/zh-mo.min.js",
+				"locale/zh-tw.js",
+				"locale/zh-tw.min.js"
+			]
+		},
+		{
+			"provider": "cdnjs",
+			"library": "overlayscrollbars@1.13.0",
+			"destination": "wwwroot/plugins/overlayScrollbars/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "pace-progressbar@1.0.5",
+			"destination": "wwwroot/plugins/pace-progress/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "pdfmake@0.2.7",
+			"destination": "wwwroot/plugins/pdfmake/",
+			"files": [
+				"pdfmake.min.js",
+				"pdfmake.js",
+				"pdfmake.js.map",
+				"pdfmake.min.js.map",
+				"vfs_fonts.js",
+				"vfs_fonts.min.js"
+			]
+		},
+		{
+			"provider": "cdnjs",
+			"library": "popper.js@1.16.1",
+			"destination": "wwwroot/plugins/popper/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "raphael@2.3.0",
+			"destination": "wwwroot/plugins/raphael/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "select2@4.0.13",
+			"destination": "wwwroot/plugins/select2/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "select2-bootstrap-theme@0.1.0-beta.10",
+			"destination": "wwwroot/plugins/select2-bootstrap-theme/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "sparklines@1.3.0",
+			"destination": "wwwroot/plugins/sparklines/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "spin.js@2.3.2",
+			"destination": "wwwroot/plugins/spin/"
+		},
+		{
+			"provider": "unpkg",
+			"library": "summernote@0.8.20",
+			"destination": "wwwroot/plugins/summernote/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "sweetalert2@11.7.20",
+			"destination": "wwwroot/plugins/sweetalert2/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "@sweetalert2/theme-bootstrap-4@5.0.15",
+			"destination": "wwwroot/plugins/sweetalert2-theme-bootstrap-4/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "tempusdominus-bootstrap-4@5.39.2",
+			"destination": "wwwroot/plugins/tempusdominus-bootstrap-4/"
+		},
+		{
+			"provider": "cdnjs",
+			"library": "toastr.js@2.1.4",
+			"destination": "wwwroot/plugins/toastr/"
+		},
+		{
+			"provider": "jsdelivr",
+			"library": "uplot@1.6.24",
+			"destination": "wwwroot/plugins/uplot/"
+		}
+	]
+}

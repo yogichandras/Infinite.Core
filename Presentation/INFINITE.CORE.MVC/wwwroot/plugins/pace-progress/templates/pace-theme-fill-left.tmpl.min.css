@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using clean-css v4.2.1.
+ * Original file: /npm/pace-progressbar@1.0.5/templates/pace-theme-fill-left.tmpl.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background-color:`Color(args.color) .clearer(.8) .rgbString() || "rgba(0, 0, 0, .2)"`;position:fixed;z-index:-1;top:0;right:100%;bottom:0;width:100%}
+/*# sourceMappingURL=/sm/7b399d5c2a84a3f3cb6e588f247b285c802cd8ceca989fce46d2e1f5e811eee4.map */

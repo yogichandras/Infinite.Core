@@ -1,0 +1,8 @@
+/**
+ * Minified by jsDelivr using clean-css v4.2.1.
+ * Original file: /npm/pace-progressbar@1.0.5/templates/pace-theme-minimal.tmpl.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:`args.color || "#29d"`;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}
+/*# sourceMappingURL=/sm/e82aa16d302d41b9a9710d9aa3f75d26a40b50d708ad2af353fa99c0f1485ce2.map */
