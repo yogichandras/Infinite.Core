@@ -5,7 +5,7 @@
     var isActive = IsActiveMenuItem(Model, ViewBag.CurrentPageName);
     var subMenus = Model.Child;
     var hasSubMenus = subMenus.Any();
-    var isAuthenticated = Model.AuthenticatedPermissions.Any(x => Model.RequiredPermissions.Any(z => z == x));
+    var isAuthenticated = Model.AuthenticatedPermissions == null || Model.AuthenticatedPermissions.Count() < 1 || Model.AuthenticatedPermissions.Any(x => Model.RequiredPermissions.Any(z => z == x));
 }
 @functions {
     private string applicationPath = "/";
